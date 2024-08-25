@@ -19,4 +19,23 @@ $(document).ready(function () {
             swiper: sw_small,
         },
     })
+
+    // Open modal image
+    $('.detail-slide').magnificPopup({
+        delegate:'a',
+        type:'image',
+        gallery: {
+          enabled: true
+        },
+        mainClass:'mfp-fade'
+    });
+    // Product + / -
+    $('.btn-num-down').on('click',function (){
+        let numProduct=Number($(this).next().val());
+        if(numProduct > 0)$(this).next().val(numProduct - 1)
+    });
+    $('.btn-num-up').on('click',function (){
+        let numProduct=Number($(this).prev().val());
+        $(this).prev().val(numProduct + 1)
+    });
 });

@@ -5,6 +5,7 @@
 {% block title %}{{ article.name }}{% endblock title %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/libraries/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/libraries/magnific-popup.css' %}" />
 {% endblock style %}
 
 {% block content %}
@@ -36,7 +37,7 @@
                             {% for detail in article.article_images %}
                             <div class="swiper-slide">
                                 <img src="{{ detail.image.url }}" alt="IMG ARTICLE">
-                                <div class="article-article"></div>
+                                <div class="overlay-article"></div>
                             </div>
                             {% endfor %}
 
@@ -48,14 +49,14 @@
                             <div class="swiper-slide">
                                 <div class="detail d-block">
                                     <img src="{{ img.image.url }}" alt="IMG ARTICLE">
-                                    <a href="#" class="article-expand d-flex justify-content-center align-items-center">
+                                    <a href="{{ img.image.url }}" class="article-expand d-flex justify-content-center align-items-center">
                                         <i class="fa-solid fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
                             {% endfor %}
                         </div>
-                        <div class="sw-arrows d-flex justify-content-between align-items-center flex-wrap"><!-- Start button article details-->
+                        <div class="sw-arrows d-flex justify-content-between"><!-- Start button article details-->
                             <button type="button" class="sw-nav-btn sw-prev">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
@@ -109,6 +110,7 @@
                             </li>
                             <li>
                                 <span>Disponibilité :</span>
+                                {% if article.stock %}
                                 <div class="stock-checkbox">
                                     <label for="stockIn">
                                         état de stock
@@ -116,6 +118,9 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
+                                {% else %}
+                                    <p>En rupture</p>
+                                {% endif %}
                             </li>
                         </ul>
                     </div>
@@ -127,5 +132,6 @@
 {% endblock content %}
 {% block scripts %}
     <script src="{% static 'js/libraries/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/libraries/jquery.magnific-popup.min.js' %}"></script>
     <script src="{% static 'store/article.js' %}"></script>
 {% endblock scripts %}

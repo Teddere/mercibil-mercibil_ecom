@@ -1628,7 +1628,7 @@ input.cart-qte-num::-webkit-inner-spin-button {
     height: 100%;
 }
 /*********************** Overlay slide ************************/
-.swiper-wrapper .swiper-slide .overlay-prod {
+.swiper-wrapper .swiper-slide .overlay-article {
     position: absolute;
     top: 0;
     left: 0;
@@ -1639,7 +1639,7 @@ input.cart-qte-num::-webkit-inner-spin-button {
     cursor: pointer;
     transition: border,background 0.3s ease;
 }
-.swiper-wrapper .swiper-slide:hover .overlay-prod,.swiper-wrapper .swiper-slide.swiper-slide-thumb-active .overlay-prod {
+.swiper-wrapper .swiper-slide:hover .overlay-article,.swiper-wrapper .swiper-slide.swiper-slide-thumb-active .overlay-article {
     border-color: var(--bs-primary);
     background: transparent;
 }
@@ -1719,10 +1719,10 @@ input.cart-qte-num::-webkit-inner-spin-button {
 .detail-slide .sw-arrows .sw-nav-btn:hover {
     color: var(--bs-primary);
 }
-.detail-gallery .sw-arrows .sw-nav-btn.sw-prev {
+.detail-slide .sw-arrows .sw-nav-btn.sw-prev {
     left: 0;
 }
-.detail-gallery .sw-arrows .sw-nav-btn.sw-next {
+.detail-slide .sw-arrows .sw-nav-btn.sw-next {
     right: 0;
 }
 @media (min-width: 991px) {
