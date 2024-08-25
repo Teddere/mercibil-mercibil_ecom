@@ -1,0 +1,98 @@
+{# templates/store/main_catalog.html #}
+{% extends 'front/base.html' %}
+{% load price_form %}
+{% block title %}Catalogue{% endblock title %}
+
+{% block content %}
+    <section class="subheader-section"><!-- Start breadcrumb-->
+        {% if category_name %}
+            <div class="head d-flex flex-wrap">
+                <a href="{% url 'store:home' %}">
+                    Accueil
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <a href="{% url 'store:catalog' %}">
+                    Catalogue
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <span>{{ category_name }}</span>
+            </div>
+        {% else %}
+            <div class="head d-flex flex-wrap">
+                <a href="{% url 'store:home' %}">
+                    Accueil
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <span>Catalogue</span>
+            </div>
+        {% endif %}
+    </section><!-- End breadcrumb-->
+    <section class="article-section"><!-- start article section-->
+        <div class="container">
+            <div class="row">
+                {% for article in object_list %}
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-4"><!-- Start product item-->
+                        <article class="article-item border rounded p-2">
+                            <div class="article-up">
+                                <img src="{{ article.thumbnail.url}}" alt="IMG-PRODUCT">
+                                <ul class="article-hover"><!--Start hover button -->
+                                    <li><a href="#"><i class="fa-solid fa-expand"></i></a></li>
+                                    <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                                    <li><a href="#"><i class="fa-solid fa-plus"></i></a></li>
+                                </ul><!--End hover button -->
+                            </div>
+                            <div class="article-down">
+                                <div class="d-flex align-items-start justify-content-between flex-wrap flex-column">
+                                    <a href="{{ article.get_absolute_url }}" class="article-name">{{ article.name }}</a>
+                                    <div class="rating rating-4">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="article-detail"><!--Start product detail-->
+                                <span class="article-price">{{ article.price | price_form }} XAF</span>
+                            </div>
+                        </article>
+                    </div><!-- End product item -->
+                {% empty %}
+                    <div class="text-center text-muted">Aucun article trouvé</div>
+                {% endfor %}
+                {% if object_list %}
+                <div class="col-12">
+                    <div class="pagination-articles">
+                        <ul class="article-pagination">
+                            {% if page_obj.has_previous %}
+                            <li>
+                                <a href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range  %}
+                                {% if page_obj.number == num %}
+                                    <li class="active">
+                                        <span>{{ num }}</span>
+                                    </li>
+                                {% else %}
+                                    <li><a href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                             {% if page_obj.has_next %}
+                                <li>
+                                <a href="?page={{ page_obj.next_page_number }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

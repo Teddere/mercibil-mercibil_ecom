@@ -1,0 +1,33 @@
+<!doctype html>
+{% load static %}
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Font awesome library -->
+        <link rel="stylesheet" href="{% static 'css/libraries/fontawesome-free/css/all.min.css' %}">
+        <!-- Icon website--->
+        <link rel="icon" href="{% static 'files/website/favicons.ico' %}">
+        <!-- other library-->
+        {% block style %}{% endblock style %}
+        <!--personality style-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <title>{% block title %}{% endblock title %}-Merci bil</title>
+    </head>
+    <body>
+        {% include 'front/static/header.html' %}
+        {% block content %}{% endblock content %}
+        {% include 'front/static/footer.html' %}
+        <!-- Jquery library -->
+        <script src="{% static 'js/libraries/jquery.min.js' %}"></script>
+        <!-- Popper library -->
+        <script src="{% static 'js/libraries/popper.min.js' %}"></script>
+        <!-- Bootstrap library -->
+        <script src="{% static 'js/libraries/bootstrap.min.js' %}"></script>
+        <!-- Other plugin or other personal javascript file -->
+        {% block scripts %}{% endblock scripts %}
+        <!-- javascript -->
+        <script src="{% static 'js/index.js' %}"></script>
+    </body>
+</html>

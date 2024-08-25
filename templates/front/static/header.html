@@ -1,0 +1,72 @@
+{% url 'store:home' as path_to_home_page %}
+{% url 'store:cart' as path_to_cart_page %}
+{% load static %}
+<header class="header-section"><!--Start header section-->
+    <nav class="nav-top border border-bottom"><!--Start navbar top -->
+        <div class="nav-top-content container-lg h-100 d-flex align-items-center justify-content-sm-between">
+            <div class="left-content d-none d-sm-block">
+                Nous contacter : &nbsp;<b>+242 06 838 27 92</b>
+            </div>
+            <p class="center-content d-none d-md-block">Livraison gratuit à partir de 20 000 XAF d'achat</p>
+            <div class="right-content">
+                <a href="#"><i class="fa-regular fa-circle-question"></i></a>
+                <a href="#"><i class="fa-solid fa-phone"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </nav><!--End navbar top -->
+    <nav class="nav-main container-lg"><!--Start main nav -->
+        <div class="nav-content d-flex align-items-center justify-content-between overflow-hidden">
+            <a href="{{ path_to_home_page }}" class="logo">
+                <img src="{% static 'files/website/logo.png' %}" alt="LOGO WEBSITE">
+            </a>
+            <ul id="nav-menu" class="nav-menu d-md-flex justify-content-md-center align-items-md-center">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Bijoux</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Vêtements</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Lingéries</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Tissages</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Chaussures</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Accessoires</a>
+                </li>
+            </ul>
+            <ul class="nav-icon d-flex"><!--Start icon menu -->
+                <li class="nav-icon-item">
+                    <a href="#" class="nav-icon-link search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                </li>
+                <li class="nav-icon-item shopping-icon position-relative">
+                    <a href="{{ path_to_cart_page }}" class="nav-icon-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <div class="shopping-num d-flex justify-content-center align-items-center">
+                        <div class="number">9+</div>
+                    </div>
+                </li>
+                <li class="nav-icon-item">
+                    <a href="#" class="nav-icon-link">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-icon-btn d-md-none">
+                    <button id="btn-toggle" type="button" class="btn-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </li>
+            </ul><!--End icon menu -->
+        </div>
+    </nav><!--End main nav -->
+</header><!--End header section-->
