@@ -6,8 +6,9 @@ from articles.utils import generate_slug
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True,blank=True)
+    image = models.ImageField(upload_to='categories/',default='default_category.jpg')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

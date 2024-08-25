@@ -1,0 +1,15 @@
+{# templates/store/main.html #}
+{% extends 'front/base.html' %}
+{% load static %}
+{% block title %}Accueil{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/libraries/swiper-bundle.min.css' %}">
+{% endblock style %}
+{% block scripts %}
+    <script src="{% static 'js/libraries/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'store/main.js' %}"></script>
+{% endblock scripts %}
+
+{% block content %}
+    <h1 class="text-primary">Hello, i'm main template</h1>
+{% endblock content %}

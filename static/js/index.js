@@ -21,4 +21,7 @@ $(document).ready(function (){
         navTopMenu.show('slow')
       }
     });
+
+    // Footer
+  document.querySelector('#copyright-date').innerHTML=new Date().getFullYear();
 });
