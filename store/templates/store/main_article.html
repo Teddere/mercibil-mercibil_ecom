@@ -1,0 +1,131 @@
+{# templates/store/main_article.html #}
+{% extends 'front/base.html' %}
+{% load static %}
+{% load price_form %}
+{% block title %}{{ article.name }}{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/libraries/swiper-bundle.min.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <section class="subheader-section"><!-- Start breadcrumb-->
+        <div class="head d-flex flex-wrap">
+            <a href="{% url 'store:home' %}">
+                Accueil
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <a href="{% url 'store:catalog' %}">
+                Catalogue
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <a href="{{ article.category.get_absolute_url }}">
+                {{ article.category.name }}
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <span>{{ article.name }}</span>
+        </div>
+    </section><!-- End breadcrumb-->
+    <section class="article-detail-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-7"><!-- Start product detail images -->
+                    <div class="article-detail-image d-flex justify-content-between align-items-start">
+                    <div class="sw-article detail-article"><!-- Start product description images -->
+
+                        <div class="swiper-wrapper">
+                            {% for detail in article.article_images %}
+                            <div class="swiper-slide">
+                                <img src="{{ detail.image.url }}" alt="IMG ARTICLE">
+                                <div class="article-article"></div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><!-- End product description images -->
+                    <div class="sw-article detail-slide">
+                        <div class="swiper-wrapper">
+                            {% for img in article.article_images %}
+                            <div class="swiper-slide">
+                                <div class="detail d-block">
+                                    <img src="{{ img.image.url }}" alt="IMG ARTICLE">
+                                    <a href="#" class="article-expand d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="sw-arrows d-flex justify-content-between align-items-center flex-wrap"><!-- Start button article details-->
+                            <button type="button" class="sw-nav-btn sw-prev">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button type="button" class="sw-nav-btn sw-next">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div><!-- End button article details-->
+                    </div>
+                </div>
+                </div><!-- End product detail images -->
+                <div class="col-md-6 col-lg-5">
+                <div class="article-detail-description">
+                    <h3>
+                        {{ article.name }}
+                        <span>Catégorie : {{ article.category.name }}</span>
+                    </h3>
+                    <div class="rating rating-5">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="article-desc-price">
+                        {{ article.price | price_form }} XAF
+                    </div>
+                    <p>{{ article.description|truncatechars:140 }}</p>
+                    <div class="article-btn">
+                        <div class="article-qty">
+                            <span>Quantité :</span>
+                            <div class="art-num d-flex flex-nowrap">
+                                <label for="cart_num" class="btn-num-down qty-num d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-minus"></i>
+                                </label>
+                                <input type="text" name="cart_num" id="cart_num" value="1" class="qty-value" />
+                                <label for="cart_num" class="btn-num-up qty-num d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-plus"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="button" class="art-cart-add d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-shopping-bag"></i>
+                            Ajouter
+                        </button>
+                    </div>
+                    <div class="art-detail-widget">
+                        <ul>
+                            <li>
+                                <span>Label :</span>
+                                <p>Nouveau</p>
+                            </li>
+                            <li>
+                                <span>Disponibilité :</span>
+                                <div class="stock-checkbox">
+                                    <label for="stockIn">
+                                        état de stock
+                                        <input type="checkbox" id="stockIn" disabled checked />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block scripts %}
+    <script src="{% static 'js/libraries/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'store/article.js' %}"></script>
+{% endblock scripts %}

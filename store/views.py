@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView,ListView
+from django.views.generic import TemplateView,ListView,DetailView
 from django.shortcuts import redirect
 from django.core.paginator import EmptyPage,PageNotAnInteger
 from articles.models import Article, Category
@@ -56,3 +56,8 @@ class CatalogView(ListView):
             page_obj = paginator.page(paginator.num_pages)
 
         return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'store/main_article.html'
+    object = 'article'

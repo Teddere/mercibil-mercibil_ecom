@@ -50,7 +50,7 @@ class Article(models.Model):
         return f"{self.name}-({self.stock})"
 
     def get_absolute_url(self):
-        pass
+        return reverse('store:article_detail',kwargs={'slug':self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
