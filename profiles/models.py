@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, default='Vendeur')
     bio = models.TextField(default='No Bio')
-    avatar = models.ImageField(upload_to='profile/',blank=True,null=True)
+    avatar = models.ImageField(upload_to='profile/',default='profile/profile_no.svg')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

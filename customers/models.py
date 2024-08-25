@@ -5,6 +5,7 @@ User = get_user_model()
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20, unique=True, null=False, blank=False)
     thumbnail = models.ImageField(upload_to='customers/', blank=True,null=True)
     created =models.DateTimeField(auto_now_add=True)
     updated =models.DateTimeField(auto_now=True)
