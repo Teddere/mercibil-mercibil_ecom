@@ -1,6 +1,7 @@
 {# templates/store/main.html #}
 {% extends 'front/base.html' %}
 {% load static %}
+{% load price_form %}
 {% block title %}Accueil{% endblock title %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/libraries/swiper-bundle.min.css' %}">
@@ -133,7 +134,7 @@
                             </div>
                         <div class="article-down">
                             <div class="d-flex align-items-start justify-content-between flex-wrap">
-                                <a href="#" class="article-name">{{ article.name }}</a>
+                                <a href="{{ article.get_absolute_url }}" class="article-name">{{ article.name }}</a>
                                 <div class="rating rating-4">
                                     <i class="fa-solid fa-star"></i>
                                     <i class="fa-solid fa-star"></i>
@@ -144,7 +145,7 @@
                             </div>
                         </div>
                         <div class="article-detail"><!--Start product detail-->
-                            <span class="article-price">{{ article.price }} XAF</span>
+                            <span class="article-price">{{ article.price | price_form }} XAF</span>
                         </div>
                     </div>
                         </article><!-- End article item -->

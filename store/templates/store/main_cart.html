@@ -1,0 +1,163 @@
+{# templates/store/main_cart.html #}
+{% extends 'front/base.html' %}
+{% block title %}Panier{% endblock title %}
+{% load static %}
+{% block content %}
+    <section class="subheader-section"><!-- Start breadcrumb-->
+        <div class="head d-flex flex-wrap">
+            <a href="{% url 'store:home' %}">
+                Accueil
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <a href="{% url 'store:catalog' %}">
+                Catalogue
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <span>Panier</span>
+        </div>
+    </section><!-- End breadcrumb-->
+    <section class="cart-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-7 mb-5 ms-auto me-auto"><!--ms-auto me-auto-->
+                    <div class="cart-left-content">
+                        <div class="cart-table">
+                            <table class="cart-table-item">
+                                <tr class="table-head">
+                                    <th class="column-1">Article</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Prix</th>
+                                    <th class="column-4">Quantité</th>
+                                    <th class="column-5">Total</th>
+                                </tr>
+                                <tr class="table-item">
+                                    <td class="column-1">
+                                        <div class="cart-image">
+                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">
+                                        <span class="cart-name">Fresh Strawberries</span>
+                                        <span class="cart-category">Fresh Strawberries</span>
+                                    </td>
+                                    <td class="column-3">150.000 XAF</td>
+                                    <td class="column-4">
+                                        <div class="cart-num d-flex flex-wrap me-0 ms-auto">
+                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <input type="number" value="1" min="1"  name="" id="" class="cart-qte-num text-center" />
+                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">200.230 XAF</td>
+                                </tr>
+                                <tr class="table-item">
+                                    <td class="column-1">
+                                        <div class="cart-image">
+                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">
+                                        <span class="cart-name">Fresh Strawberries</span>
+                                        <span class="cart-category">Fresh Strawberries</span>
+                                    </td>
+                                    <td class="column-3">150.000 XAF</td>
+                                    <td class="column-4">
+                                        <div class="cart-num d-flex flex-wrap me-0 ms-auto">
+                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <input type="number" name="" id="" class="cart-qte-num text-center" />
+                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">200.230 XAF</td>
+                                </tr>
+                                <tr class="table-item">
+                                    <td class="column-1">
+                                        <div class="cart-image">
+                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">
+                                        <span class="cart-name">Fresh Strawberries</span>
+                                        <span class="cart-category">Fresh Strawberries</span>
+                                    </td>
+                                    <td class="column-3">150.000 XAF</td>
+                                    <td class="column-4">
+                                        <div class="cart-num d-flex flex-wrap me-0 ms-auto">
+                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </div>
+                                            <input type="number" name="" id="" class="cart-qte-num text-center" />
+                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">200.230 XAF</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div class="cart-promo d-flex flex-wrap justify-content-between align-items-center">
+                            <div class="cart-coupon d-flex flex-wrap align-items-center">
+                                <input type="text" name="" id="" placeholder="Entrez votre coupon">
+                                <div class="cart-coupon-text d-flex justify-content-center align-items-center">
+                                    Code promo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-lg-7 col-xl-5 mb-5 ms-auto me-auto">
+                    <div class="cart-right-content">
+                        <h4>Total panier</h4>
+                        <div class="cart-sum-prod d-flex flex-wrap align-items-start">
+                            <div class="cart-label">
+                                <span>Total : </span>
+                            </div>
+                            <div class="cart-current-price">
+                                <span>$79.65</span>
+                            </div>
+                        </div>
+                        <div class="cart-prod-detail d-flex flex-wrap align-items-start">
+                            <div class="cart-prod-label">
+                                <span>Vente : </span>
+                            </div>
+                            <div class="cart-prod-text">
+                                <p>There are no shipping methods available. Please double check your address, or contact us if you need any help.</p>
+                            </div>
+                        </div>
+                        <div class="group-form py-4">
+                            <input type="text" name="" id="" placeholder="Entrez votre nom" class="form-control mb-2">
+                            <input type="text" name="" id="" placeholder="Entrez votre numéro" class="form-control mb-2">
+                            <select name="city"  class="form-control">
+                                <option value="None" disabled selected>Veuillez entrer la ville</option>
+                                <option value="BZV">Brazzaville</option>
+                                <option value="PN">Pointe-Noire</option>
+                            </select>
+                        </div>
+                        <div class="cart-prod-price d-flex flex-wrap align-items-start">
+                            <div class="cart-price-label">
+                                <span>Total</span>
+                            </div>
+                            <div class="cart-price-value">
+                                <span>$79.65</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block scripts %}
+    <script src="{% static 'store/cart.js' %}"></script>
+{% endblock scripts %}

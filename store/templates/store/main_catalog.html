@@ -1,5 +1,6 @@
-{# templates/store/main_article.html #}
+{# templates/store/main_catalog.html #}
 {% extends 'front/base.html' %}
+{% load price_form %}
 {% block title %}Catalogue{% endblock title %}
 
 {% block content %}
@@ -53,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="article-detail"><!--Start product detail-->
-                                <span class="article-price">{{ article.price }} XAF</span>
+                                <span class="article-price">{{ article.price | price_form }} XAF</span>
                             </div>
                         </article>
                     </div><!-- End product item -->

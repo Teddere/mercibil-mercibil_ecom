@@ -56,8 +56,14 @@ class CatalogView(ListView):
             page_obj = paginator.page(paginator.num_pages)
 
         return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
-
+# article detail page view content
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'store/main_article.html'
     object = 'article'
+
+# cart page view content
+class CartView(TemplateView):
+    template_name = 'store/main_cart.html'
+
+
