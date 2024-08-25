@@ -20,7 +20,7 @@ class Category(models.Model):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        pass
+        return reverse('store:catalog_detail',kwargs={'slug':self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
