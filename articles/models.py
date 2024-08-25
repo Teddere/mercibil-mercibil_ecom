@@ -16,6 +16,9 @@ class Category(models.Model):
     def articles(self):
         return Article.objects.filter(category=self)
 
+    def __str__(self):
+        return f"{self.name}"
+
     def get_absolute_url(self):
         pass
 
@@ -40,6 +43,7 @@ class Article(models.Model):
     @property
     def article_images(self):
         return ArticleImage.objects.filter(article=self)
+
 
 
     def __str__(self):

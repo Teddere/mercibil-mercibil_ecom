@@ -11,5 +11,257 @@
 {% endblock scripts %}
 
 {% block content %}
-    <h1 class="text-primary">Hello, i'm main template</h1>
+    <main>
+        <section class="banner-section"><!--Start banner section -->
+            <div class="sw-main">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><!--Start slide item  -->
+                        <div class="slide-image" style="background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('{% static 'files/banner/banner-1.jpg' %}')"></div>
+                            <div class="slide-content">
+                                <span class="slide-subtitle">Promotions</span>
+                                <h2 class="slide-title">Nouvelle collection</h2>
+                            </div>
+                    </div><!--End Start slide item -->
+                    <div class="swiper-slide"><!--Start Start slide item -->
+                        <div class="slide-image" style="background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('{% static 'files/banner/banner_shoe.jpg' %}')"></div>
+                            <div class="slide-text">
+                                <div class="container">
+                                    <div class="col-md-6 col-lg-7 col-xl-6">
+                                        <h2 class="slide-headline">Luxe à Vos Pieds</h2>
+                                        <p class="text-banner">Élégance inégalée, confort suprême. Découvrez notre collection de chaussures haut de gamme pour un style raffiné.</p>
+                                        <div class="main-border-button">
+                                            <a href="#">Consulter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div><!--End Start slide item -->
+                    <div class="swiper-slide"><!--Start Start slide item -->
+                        <div class="slide-image" style="background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('{% static 'files/banner/banner-2.jpg' %}')"></div>
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="col-md-6 col-lg-7 col-xl-6">
+                                    <h2 class="slide-headline">Élégance Sublime</h2>
+                                    <p class="text-banner">Raffinement intemporel, luxe à chaque détail. Découvrez notre collection exclusive de vêtements haut de gamme pour un style inégalé.</p>
+                                    <div class="main-border-button">
+                                        <a href="#">Consulter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--End Start slide item -->
+                </div>
+            </div>
+        </section><!--End banner section -->
+        <section class="promo-section"><!--Start promo section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="section-heading">
+                            <span>Le meilleur plan du moment</span>
+                            <h2>Prix promotionnel</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="promo-item">
+                            <div class="promo-image">
+                                <img src="{% static 'files/promo/promo_3.png' %}" alt="Promo-1">
+                                <div class="promo-text promo-1">
+                                    <h2 class="promo-title">-30% reduction</h2>
+                                    <span class="promo-subtile">Sac</span>
+                                </div>
+                            </div>
+                            <div class="promo-link">
+                                <a href="#">Consulter</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="promo-item">
+                            <div class="promo-image">
+                                <img src="{% static 'files/promo/promo_1.png' %}" alt="Promo-2">
+                                <div class="promo-text promo-2">
+                                    <h2 class="promo-title">-20% reduction</h2>
+                                    <span class="promo-subtile">Manteaux & Vestes</span>
+                                </div>
+                            </div>
+                            <div class="promo-link">
+                                <a href="#">Consulter</a>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="promo-item">
+                        <div class="promo-image">
+                            <img src="{% static 'files/promo/promo_4.png' %}" alt="Promo-3">
+                            <div class="promo-text promo-3">
+                                <h2 class="promo-title">-35% reduction</h2>
+                                <span class="promo-subtile">Perruque</span>
+                            </div>
+                        </div>
+                        <div class="promo-link">
+                            <a href="#">Consulter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section><!--End  promo section -->
+        <section><!--Start arrival section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="section-heading">
+                            <span>Tendance du moment</span>
+                            <h2>Nouvels arrivages</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                     {% for article in articles %}
+                        <article class="col-sm-6 col-md-4 col-lg-3 mt-2"><!-- Start article item -->
+                            <div class="article-item border p-2 rounded">
+                                <div class="article-up">
+                                <img src="{{ article.thumbnail.url }}" alt="IMG-PRODUCT">
+                                <ul class="article-hover"><!--Start hover button -->
+                                    <li><a href="#"><i class="fa-solid fa-expand"></i></a></li>
+                                    <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                                    <li><a href="#"><i class="fa-solid fa-plus"></i></a></li>
+                                </ul><!--End hover button -->
+                            </div>
+                        <div class="article-down">
+                            <div class="d-flex align-items-start justify-content-between flex-wrap">
+                                <a href="#" class="article-name">{{ article.name }}</a>
+                                <div class="rating rating-4">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-detail"><!--Start product detail-->
+                            <span class="article-price">{{ article.price }} XAF</span>
+                        </div>
+                    </div>
+                        </article><!-- End article item -->
+                    {% empty %}
+                         <div class="col-12">
+                             <div class="text-muted text-center text-primary">Aucun article disponible</div>
+                         </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section><!--End arrival section-->
+        <section class="banner-pub-section clearfix"><!--Start banner pub section -->
+        <div class="banner-promo promo-1"><!--Start banner pub item -->
+            <div class="promo-image" style="background-image: url('{% static 'files/pub/extra_1.jpg' %}')"></div>
+            <div class="promo-content-1 d-flex flex-column align-items-center justify-content-center text-center">
+                <div class="promo-price">30%<span>Remise</span></div>
+                <h3 class="promo-title">Tous nos chaussures</h3>
+                <p class="promo-text">
+                    Profitez de 30% de remise sur toutes nos chaussures haut de gamme. Offrez-vous le luxe à un prix exceptionnel !
+                </p>
+                <div class="promo-btn"><a href="#">Voir</a></div>
+            </div>
+        </div><!--End banner pub item -->
+        <div class="banner-promo promo-2"><!--Start banner pub item -->
+            <div class="promo-image" style="background-image: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.5)) ,url('{% static 'files/pub/extra_2.jpg' %}')"></div>
+            <div class="promo-content-2 d-flex flex-column align-items-center justify-content-center text-center">
+                <div class="promo-title-2">
+                    <div class="promo-center">&</div>
+                    <div class="promo-top">Mélanger</div>
+                    <div class="promo-bottom">les styles</div>
+                </div>
+                <div class="promo-text-2">
+                    Mélangez les styles avec notre collection exclusive de vêtements. Osez l'élégance unique, et profitez de 30% de remise !
+                </div>
+                <div class="promo-btn">
+                    <a href="#">Voir</a>
+                </div>
+            </div>
+        </div><!--End banner pub item -->
+    </section><!--End banner pub section -->
+        <section class="category-section"><!-- start category section-->
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Articles</h2>
+                    <span>Retrouvez tout notre catalogue</span>
+                </div>
+                <div class="row align-items-stretch">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    {% for category in categories %}
+                        {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+                            {% if forloop.counter <= 2 %}
+                            <a href="{{ category.get_absolute_url }}" class="category-item gradient cat-height">
+                                <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({{ category.image.url }})"></div>
+                                <div class="category-text">
+                                    <h2>{{ category.name }}</h2>
+                                </div>
+                            </a>
+                            {% elif forloop.counter|divisibleby:3 or forloop.counter == 7  %}
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <a href="{{ category.get_absolute_url }}" class="category-item gradient cat-img">
+                                <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({{ category.image.url }})"></div>
+                                <div class="category-text">
+                                    <h2>{{ category.name }}</h2>
+                                </div>
+                            </a>
+                        </div>
+
+                    {% else %}
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        {% endif %}
+                            <a href="{{ category.get_absolute_url }}" class="category-item gradient cat-height">
+                            <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({{ category.image.url }})"></div>
+                            <div class="category-text">
+                                <h2>{{ category.name }}</h2>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                <!--
+
+                <a href="#" class="category-item gradient cat-height">
+                                <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({% static 'files/product/close-up-2.png' %})"></div>
+                                <div class="category-text">
+                                    <h2>My category</h2>
+                                </div>
+                            </a>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="#" class="category-item cat-img  gradient">
+                        <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({% static 'files/product/close-up-2.png' %})"></div>
+                        <div class="category-text">
+                            <h2>My category</h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="#" class="category-item gradient cat-height">
+                        <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({% static 'files/product/close-up-2.png' %})"></div>
+                        <div class="category-text">
+                            <h2>My category</h2>
+                        </div>
+                    </a>
+                    <a href="#" class="category-item gradient cat-height">
+                        <div class="category-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 100%), url({% static 'files/product/close-up-2.png' %})"></div>
+                        <div class="category-text">
+                            <h2>My category</h2>
+                        </div>
+                    </a>
+                </div>-->
+            </div>
+            <div class="link-categories d-flex justify-content-center align-items-start flex-wrap w-100">
+                <a href="#" class="d-flex justify-content-center align-items-center">
+                    Catalogue
+                </a>
+            </div>
+        </div>
+        </section><!-- End category section-->
+    </main>
 {% endblock content %}
