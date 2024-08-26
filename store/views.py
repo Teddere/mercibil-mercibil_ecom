@@ -1,7 +1,8 @@
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView,FormView
 from django.shortcuts import redirect,render
 from django.core.paginator import EmptyPage,PageNotAnInteger
-from users.forms import RegisterShopperUser
+from django.contrib import messages
+from users.forms import RegisterShopperUser,LoginFormUser
 from users.models import Shopper
 from articles.models import Article, Category
 
@@ -65,7 +66,7 @@ class ArticleDetailView(DetailView):
 # cart page view content
 class CartView(TemplateView):
     template_name = 'store/main_cart.html'
-
+# Register shopper view content
 class RegisterView(CreateView):
     model = Shopper
     form_class = RegisterShopperUser
@@ -76,11 +77,19 @@ class RegisterView(CreateView):
         form = RegisterShopperUser(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
+            messages.success(request, f'Compte de {user.username} créé avec succès !')
             return redirect('store:home')
-
+        messages.error(request, 'Le compte n\'a pas pu être créer !')
         context["form"] = form
         return render(request, self.template_name, context)
+# Login page view content
+class LoginView(FormView):
+    form_class = LoginFormUser
+    template_name = 'store/main_login.html'
+
+class DashboardView(TemplateView):
+    pass
 
 
 

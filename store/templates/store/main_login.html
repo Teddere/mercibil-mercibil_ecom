@@ -1,0 +1,56 @@
+{# templates/store/main_login.html #}
+{% extends 'front/base.html' %}
+{% load form_field %}
+{% block title %}Connexion{% endblock title %}
+
+{% block content %}
+    <section class="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-heading text-center mb-5">
+                        <h2>Connexion</h2>
+                        <span>Connectez vous à votre compte en toute sécurité</span>
+                    </div>
+                    <form  method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for field in form %}
+                            <div class="col-12 mb-3">
+                                <div class="row form-group position-relative">
+                                    <label for="{{ field.id_for_label }}" class="input-icon">
+                                        {% if field.id_for_label == 'id_email' %}
+                                            <i class="fa-solid fa-envelope"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-lock"></i>
+                                        {% endif %}
+                                    </label>
+                                    {% if field.errors %}
+                                        {{ field | add_class:'form-control is-invalid' }}
+                                        <div class="invalid-feedback">
+                                            {{ field.errors }}
+                                        </div>
+                                    {% else %}
+                                        {{ field }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="col-12">
+                                <div class="row form-group main-border-button">
+                                    <button type="submit">Connexion</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-12 ps-0 mt-4">
+                            Si vous ne possédez pas compter.
+                            <a href="{% url 'store:register' %}" class="text-primary">Créer un nouveau compte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

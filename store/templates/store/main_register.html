@@ -24,6 +24,7 @@
                         <h2>Création d'un compte</h2>
                         <span>Créer un nouveau compte utilisateur</span>
                     </div>
+                    {% include 'front/static/flash_message.html' %}
                     <form  method="post">
                         {% csrf_token %}
                         <div class="row">
@@ -60,6 +61,12 @@
                             </div>
                         </div>
                     </form>
+                    <div class="row">
+                        <div class="col-12 ps-0 mt-4">
+                            Vous possédez déjà un compte.
+                            <a href="{% url 'store:login' %}" class="text-primary">Connectez-vous à votre compte</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

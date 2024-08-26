@@ -32,6 +32,7 @@
                     10.4 description box
                 11 login page
                     11.1 page register
+                    11.2 page login
 
 */
 /****************************************************************
@@ -1969,4 +1970,9 @@ input.cart-qte-num::-webkit-inner-spin-button {
 }
 .register-section small {
     font-size: 12px;
+}
+/******************* 11.2 page login ***********************/
+.login-section {
+    padding-top: 60px;
+    padding-bottom: 45px;
 }
