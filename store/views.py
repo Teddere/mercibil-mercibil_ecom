@@ -1,6 +1,8 @@
-from django.views.generic import TemplateView,ListView,DetailView
-from django.shortcuts import redirect
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.shortcuts import redirect,render
 from django.core.paginator import EmptyPage,PageNotAnInteger
+from users.forms import RegisterShopperUser
+from users.models import Shopper
 from articles.models import Article, Category
 
 
@@ -14,9 +16,7 @@ class HomeView(TemplateView):
         context['categories'] = Category.objects.all()
         return context
 
-
 # catalog page view content
-
 class CatalogView(ListView):
     model = Article
     template_name = "store/main_catalog.html"
@@ -65,5 +65,23 @@ class ArticleDetailView(DetailView):
 # cart page view content
 class CartView(TemplateView):
     template_name = 'store/main_cart.html'
+
+class RegisterView(CreateView):
+    model = Shopper
+    form_class = RegisterShopperUser
+    template_name = 'store/main_register.html'
+
+    def post(self, request, *args, **kwargs):
+        context = { }
+        form = RegisterShopperUser(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('store:home')
+
+        context["form"] = form
+        return render(request, self.template_name, context)
+
+
 
 

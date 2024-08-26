@@ -16,6 +16,9 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.role = self.base_role
+
+        if self.password:
+            self.set_password(self.password)
         return super().save(*args, **kwargs)
 
 class ShopperManager(BaseUserManager):
