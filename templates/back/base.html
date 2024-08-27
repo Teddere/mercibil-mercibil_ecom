@@ -1,0 +1,33 @@
+<!doctype html>
+{% load static %}
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Font awesome library -->
+        <link rel="stylesheet" href="{% static 'css/libraries/fontawesome-free/css/all.min.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'files/website/favicons.ico' %}">
+        <!-- other library-->
+        {% block style %}{% endblock style %}
+        <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+        <title>{% block title %}{% endblock title %}-Mercibil</title>
+    </head>
+    <body>
+        <main class="page">
+            {% include 'back/static/header.html' %}
+            <div class="page-wrapper">
+                {% block content %}{% endblock content %}
+            </div>
+            {% include 'back/static/footer.html' %}
+        </main>
+        <!-- Jquery library -->
+        <script src="{% static 'js/libraries/jquery.min.js'  %}"></script>
+        <!-- Popper library-->
+        <script src="{% static 'js/libraries/popper.min.js'  %}"></script>
+        <!-- Bootstrap library-->
+        <script src="{% static 'js/libraries/bootstrap.min.js'  %}"></script>
+        {% block scripts %}{% endblock scripts %}
+        <script src="{% static 'js/dashboard.js' %}"></script>
+    </body>
+</html>

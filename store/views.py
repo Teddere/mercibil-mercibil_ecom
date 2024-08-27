@@ -89,7 +89,7 @@ class LoginView(FormView):
     template_name = 'store/main_login.html'
 
 class DashboardView(TemplateView):
-    pass
+    template_name = 'store/main_dashboard.html'
 
 
 

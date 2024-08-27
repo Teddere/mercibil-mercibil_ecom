@@ -1,5 +1,8 @@
 {% url 'store:home' as path_to_home_page %}
 {% url 'store:cart' as path_to_cart_page %}
+{% url 'store:login' as path_to_login_page %}
+{% url 'store:cart' as path_to_cart_page %}
+{% url 'store:catalog_detail' 'bijoux' as path_to_catalog_bijoux %}
 {% load static %}
 <header class="header-section"><!--Start header section-->
     <nav class="nav-top border border-bottom"><!--Start navbar top -->
@@ -24,7 +27,7 @@
             </a>
             <ul id="nav-menu" class="nav-menu d-md-flex justify-content-md-center align-items-md-center">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">Bijoux</a>
+                    <a href="{{ path_to_catalog_bijoux }}" class="menu-link">Bijoux</a>
                 </li>
                 <li class="menu-item">
                     <a href="#" class="menu-link">Vêtements</a>
@@ -57,7 +60,7 @@
                     </div>
                 </li>
                 <li class="nav-icon-item">
-                    <a href="#" class="nav-icon-link">
+                    <a href="{{ path_to_login_page }}" class="nav-icon-link">
                         <i class="fa-solid fa-user"></i>
                     </a>
                 </li>

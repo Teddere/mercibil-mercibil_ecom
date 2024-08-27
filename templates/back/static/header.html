@@ -1,0 +1,171 @@
+{% load static %}
+{% url 'store:home' as path_to_home_page %}
+<header class="navbar navbar-expand-md d-print-none" ><!-- start navbar top -->
+    <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href="{{ path_to_home_page }}">
+                <img src="{% static 'files/website/logo.png' %}" width="110" height="32" alt="Merci bil" class="navbar-brand-image">
+            </a>
+        </h1>
+        <div class="navbar-nav flex-row order-md-last">
+            <div class="d-none d-md-flex"><!-- start icon button -->
+                <!-- Start button theme dark or light --->
+                <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                    <i class="fa-regular fa-moon"></i>
+                </a>
+                <a href="?theme=light" class="nav-link px-0 hide-theme-light"  data-bs-toggle="tooltip" data-bs-placement="bottom">
+                    <i class="fa-regular fa-sun"></i>
+                </a>
+                <!-- End button theme dark or light --->
+                <div class="nav-item dropdown d-none d-md-flex me-3"><!-- Start notification item-->
+                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge bg-red"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Notifications</h3>
+                            </div>
+                            <div class="list-group list-group-flush list-group-hoverable">
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
+                                        <div class="col text-truncate">
+                                            <a href="#" class="text-body d-block">Example 1</a>
+                                            <div class="d-block text-secondary text-truncate mt-n1">
+                                                Change deprecated html tags to text decoration classes (#29604)
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="list-group-item-actions">
+                                                <i class="fa-regular fa-star"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End notification item-->
+
+            </div><!-- End icon button -->
+            <div class="nav-item dropdown"><!-- Start profile button -->
+                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                    <span class="avatar avatar-sm" style="background-image: url({{ request.user.profile.avatar.url }})"></span>
+                    <div class="d-none d-xl-block ps-2">
+                        <div>{{ request.user.username }}</div>
+                        <div class="mt-1 small text-secondary">{{ request.user.profile.status }}</div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <a href="#" class="dropdown-item">{{ request.user.profile.status }}</a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fa-solid fa-user me-2"></i>
+                        Profile
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fa-regular fa-paper-plane me-2"></i>
+                        Inbox
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
+                        Déconnexion
+                    </a>
+                </div>
+            </div><!-- End profile button -->
+        </div>
+    </div>
+</header><!-- End navbar top -->
+<header class="navbar-expand-md"><!--start main nav -->
+    <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="navbar">
+            <div class="container-xl">
+                <ul class="navbar-nav"><!-- start main nav item-->
+                    <li class="nav-item active"><!-- start item nav -->
+                        <a class="nav-link" href="#" >
+                           <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-house"></i>
+                           </span>
+                            <span class="nav-link-title">Dashboard</span>
+                        </a>
+                    </li><!-- end item nav -->
+                    <li class="nav-item dropdown"><!-- start item nav -->
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-list"></i>
+                            </span>
+                            <span class="nav-link-title">Articles</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"  rel="Articles">Articles</a>
+                            <a href="#" class="dropdown-item"  rel="Catégorie">Catégories</a>
+                        </div>
+                    </li><!-- end item nav -->
+                    <li class="nav-item dropdown"><!-- start item nav -->
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-user-group"></i>
+                            </span>
+                            <span class="nav-link-title">Clients</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"  rel="new customer">Nouveau</a>
+                            <a href="#" class="dropdown-item"  rel="list customer">Liste des clients</a>
+                        </div>
+                    </li><!-- end item nav -->
+                    <li class="nav-item dropdown"><!-- start item nav -->
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-chart-simple"></i>
+                            </span>
+                            <span class="nav-link-title">Ventes</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"  rel="new sale">Nouveau</a>
+                            <a href="#" class="dropdown-item"  rel="list sales">Liste des ventes</a>
+                        </div>
+                    </li><!-- end item nav -->
+                    <li class="nav-item dropdown"><!-- start item nav -->
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-chart-pie"></i>
+                            </span>
+                            <span class="nav-link-title">Rapports</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"  rel="new report">Nouveau</a>
+                            <a href="#" class="dropdown-item"  rel="list reports">Liste des rapports</a>
+                        </div>
+                    </li><!-- end item nav -->
+                    <li class="nav-item dropdown"><!-- start item nav -->
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                               <i class="fa-solid fa-user"></i>
+                            </span>
+                            <span class="nav-link-title">Utilisateurs</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"  rel="new user">Nouveau</a>
+                            <a href="#" class="dropdown-item"  rel="list users">Liste utilisateurs</a>
+                        </div>
+                    </li><!-- end item nav -->
+                </ul><!-- End main nav item-->
+                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last"><!-- start search field-->
+                    <form action="./" method="get" autocomplete="off" novalidate>
+                        <div class="input-icon">
+                            <span class="input-icon-addon align-middle pt-2">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                            <input type="search" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
+                        </div>
+                    </form>
+                </div><!-- End search field-->
+            </div>
+        </div>
+    </div>
+</header><!--End main nav -->
