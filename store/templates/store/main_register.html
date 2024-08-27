@@ -1,0 +1,74 @@
+{# templates/store/main_register.html #}
+{% extends 'front/base.html' %}
+{% load form_field %}
+{% block title %}Création{% endblock title %}
+{% block content %}
+    <section class="subheader-section"><!-- Start breadcrumb-->
+        <div class="head d-flex flex-wrap">
+            <a href="{% url 'store:home' %}">
+                Accueil
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <a href="{% url 'store:catalog' %}">
+                Catalogue
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <span>Création de compte</span>
+        </div>
+    </section><!-- End breadcrumb-->
+    <section class="register-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-heading text-center mb-5">
+                        <h2>Création d'un compte</h2>
+                        <span>Créer un nouveau compte utilisateur</span>
+                    </div>
+                    {% include 'front/static/flash_message.html' %}
+                    <form  method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for field in form %}
+                                {% if field.name != 'usable_password' %}
+
+                                    <div class="col-12 mb-2">
+                                        <div class="row form-group position-relative">
+                                            <label for="{{ field.id_for_label }}" class="input-icon">
+                                                {% if field.id_for_label == 'id_username' %}
+                                                    <i class="fa-solid fa-user"></i>
+                                                {% elif field.id_for_label == 'id_email' %}
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-lock"></i>
+                                                {% endif %}
+                                            </label>
+                                            {% if field.errors %}
+                                                {{ field | add_class:'form-control is-invalid' }}
+                                                <div class="invalid-feedback">
+                                                    {{ field.errors }}
+                                                </div>
+                                            {% else %}
+                                                {{ field }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-12">
+                                <div class="row form-group main-border-button">
+                                    <button type="submit">Créer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-12 ps-0 mt-4">
+                            Vous possédez déjà un compte.
+                            <a href="{% url 'store:login' %}" class="text-primary">Connectez-vous à votre compte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

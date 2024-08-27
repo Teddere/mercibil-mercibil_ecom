@@ -30,6 +30,9 @@
                     10.2 left slide
                     10.3 right slide
                     10.4 description box
+                11 login page
+                    11.1 page register
+                    11.2 page login
 
 */
 /****************************************************************
@@ -117,16 +120,16 @@ p {
     display: inline-block;
     font-weight: 600;
     font-size: calc(var(--size) - 2px);
-    color: var(--bs-primary);
+    color: var(--white);
     border: 1px solid var(--bs-primary);
     border-radius: 5px;
-    background: var(--light);
-    padding: calc(var(--size) - 5px) calc(var(--size) + 4px);
+    background: var(--bs-primary);
+    padding: calc(var(--size) - 5px) calc(var(--size) + 2px);
     transition: all 0.3s ease;
 }
 .main-border-button a:hover, .main-border-button button:hover{
-    background: var(--bs-primary);
-    color: var(--white)
+    background: var(--light);
+    color: var(--bs-primary);
 }
 .section-heading h2 {
     font-size: 36px;
@@ -1918,4 +1921,58 @@ input.cart-qte-num::-webkit-inner-spin-button {
     border: solid var(--bs-gray);
     border-width: 1.5px 1.5px 0 0;
     transform: rotate(127deg);
+}
+/****************************************************************
+                        11 login page
+ ****************************************************************/
+/****************** label icon *******************************/
+.input-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 2.5rem;
+    padding-left: 1rem;
+    pointer-events: none;
+    color: var(--bs-secondary-color);
+}
+.input-icon ~ .form-control {
+    padding-left: 2.5rem;
+}
+/********************** form control ***************************/
+.form-control {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: var(--white);
+  border-color: var(--dark);
+  outline: 0;
+  /*box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);*/
+    box-shadow: 0 0 0 2px transparent !important;
+}
+/******************* 11.1 page register ***********************/
+
+.register-section {
+    padding-top: 60px;
+    padding-bottom: 45px;
+}
+.register-section ul {
+    font-size: 12px;
+    color: var(--bs-secondary-color);
+    margin-top: 10px;
+}
+.register-section small {
+    font-size: 12px;
+}
+/******************* 11.2 page login ***********************/
+.login-section {
+    padding-top: 60px;
+    padding-bottom: 45px;
 }

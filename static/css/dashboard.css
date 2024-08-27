@@ -1,0 +1,15 @@
+@import "/static/css/libraries/dashboard.min.css";
+
+:root {
+    --tblr-blue: #DA2B6E;
+    --tblr-primary: #DA2B6E;
+    --tblr-tabler: #DA2B6E;
+    --tblr-primary-rgb: 0, 84, 166;
+    --tblr-link-color: #DA2B6E;
+    --tblr-link-hover-color: #DA2B6E;
+    --tblr-font-sans-serif: 'Poppins','Inter',sans-serif;;
+}
+i {
+    width: 24px;
+    height: 24px;
+}
