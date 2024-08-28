@@ -13,7 +13,7 @@ class ArticleListView(ListView):
     template_name = 'articles/article_main.html'
     context_object_name = 'articles'
     paginate_by = 5
-    ordering = ['created']
+    ordering = ['-created']
 
     def paginate_queryset(self, queryset, page_size):
         paginator = self.get_paginator(queryset, page_size)
@@ -27,6 +27,27 @@ class ArticleListView(ListView):
             page_obj = paginator.page(paginator.num_pages)
 
         return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
+
+    def post(self, request, *args, **kwargs):
+        context = {
+            'status':''
+        }
+        art_id = request.POST.get('id')
+        try:
+            article = Article.objects.get(id=art_id)
+            article.delete()
+            messages.success(request, f'Article {article.name} a été supprimer avec succès !')
+            context['status'] = True
+            return JsonResponse(context)
+        except Article.DoesNotExist:
+            messages.error(request, "Cet article n'existe pas dans notre catalogue !")
+        except:
+            messages.error(request, 'La suppression a échouée !')
+        context['status'] = False
+        return JsonResponse(context)
+
+
+
 # Article create view content
 class ArticleCreateView(CreateView):
     model = Article
