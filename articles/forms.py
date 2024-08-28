@@ -4,7 +4,8 @@ from articles.models import Category,Article,ArticleImage
 GENRE_CHOICES = [
     ('woman','Femme'),
     ('man','Homme'),
-    ('kid','Enfant')
+    ('kid','Enfant'),
+    ('mixed','Mixte')
 ]
 
 LABEL_CHOICES = [

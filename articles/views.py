@@ -1,10 +1,31 @@
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.contrib import messages
 from django.http import JsonResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from articles.models import Article,Category,ArticleImage
 from articles.forms import CategoryForm
+
+
+class ArticleListView(ListView):
+    model = Article
+    template_name = 'articles/article_main.html'
+    context_object_name = 'articles'
+    paginate_by = 5
+    ordering = ['-created']
+
+    def paginate_queryset(self, queryset, page_size):
+        paginator = self.get_paginator(queryset, page_size)
+        page = self.request.GET.get('page')
+
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
+        return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
 
 # Category list view content
 class CategoryListView(ListView):
@@ -57,7 +78,6 @@ class CategoryListView(ListView):
             context['message'] = 'Les informations entrées ne sont pas acceptables !'
 
         return JsonResponse(context,status=400)
-
 
 # category delete view content
 def category_delete(request):

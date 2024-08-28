@@ -1,0 +1,87 @@
+{# templates/article/article_main.html #}
+{% extends 'back/base.html' %}
+{% block title %}Articles{% endblock title %}
+
+{% block content %}
+    <section class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col"><!-- Start Page pre-title -->
+                    <div class="page-pretitle">
+                        Article
+                    </div>
+                    <h2 class="page-title">
+                        Liste articles
+                    </h2>
+                </div><!-- End Page pre-title -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <button type="button" data-filter="" class="btn btn-primary d-none d-sm-inline-block category-item"  data-bs-toggle="modal" data-bs-target="#modal_content" aria-label="Create new category">
+                            <i class="fa-solid fa-plus me-2"></i>
+                            Nouveau
+                        </button>
+                        <button type="button" class="btn btn-primary d-sm-none btn-icon category-item" data-bs-toggle="modal" data-bs-target="#modal_content" aria-label="Create new category">
+                            <i class="fa-solid fa-plus me-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards">
+                <div class="col-12">
+                    <!--  alert message -->
+                    {% include 'back/static/flash_message.html' %}
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter card-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Article</th>
+                                        <th>Catégorie</th>
+                                        <th>Prix</th>
+                                        <th>Stock</th>
+                                        <th>Style</th>
+                                        <th>Etiquette</th>
+                                        <th>Créer</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for article in articles %}
+                                        <tr>
+                                            <td>{{ article.name }}</td>
+                                            <td>
+                                                <a href="#" class="text-reset">{{ article.category.name }}</a>
+                                            </td>
+                                            <td class="text-secondary">{{ article.price }}</td>
+                                            <td class="text-secondary">{{ article.stock }}</td>
+                                            <td class="text-secondary">{{ article.genre }}</td>
+                                            <td class="text-secondary">{{ article.label }}</td>
+                                            <td class="text-secondary">{{ article.created|date:'d-m-Y' }}</td>
+                                            <td class="icon">
+                                                <div class="d-flex">
+                                                    <a href="#" class="icon-link">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <button type="button" class="article-item">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            {% include 'back/static/pagination.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
