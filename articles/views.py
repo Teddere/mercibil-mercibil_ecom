@@ -15,6 +15,20 @@ class ArticleListView(ListView):
     paginate_by = 5
     ordering = ['-created']
 
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        if slug:
+            try:
+                articles = Category.objects.get(slug=slug)
+            except Category.DoesNotExist:
+                return redirect('article:list')
+        return super().get(request, *args, **kwargs)
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        if slug:
+            return super().get_queryset().filter(category__slug=slug)
+        return super().get_queryset()
+
     def paginate_queryset(self, queryset, page_size):
         paginator = self.get_paginator(queryset, page_size)
         page = self.request.GET.get('page')
