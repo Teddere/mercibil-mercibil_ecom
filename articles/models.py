@@ -53,7 +53,7 @@ class Article(models.Model):
         return reverse('store:article_detail',kwargs={'slug':self.slug})
 
     def get_detail_url(self):
-        return None
+        return reverse('article:edit',kwargs={'slug':self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:

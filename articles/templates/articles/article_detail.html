@@ -94,6 +94,15 @@
                                         <div class="dropzone" id="dropzone-image"></div>
                                     </div>
                                 </div>
+                                {% if images %}
+                                    <div class="row mb-2">
+                                    {% for art in images %}
+                                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1 mx-2">
+                                            <img src="{{ art.image.url }}" alt="{{ art.article.name }}-image" class="img-fluid">
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-12 px-4">
                                     <div id="btnForm" class="btn btn-primary w-100">Valider</div>
                                 </div>

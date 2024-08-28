@@ -63,7 +63,7 @@
                                             <td class="text-secondary">{{ article.created|date:'d-m-Y' }}</td>
                                             <td class="icon">
                                                 <div class="d-flex">
-                                                    <a href="#" class="icon-link">
+                                                    <a href="{{ article.get_detail_url }}" class="icon-link">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </a>
                                                     <button type="button" class="article-item">

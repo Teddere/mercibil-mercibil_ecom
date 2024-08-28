@@ -65,7 +65,30 @@ class ArticleUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['pageTitle']= 'Modification de l\'article'
+        context['images'] = ArticleImage.objects.filter(article=self.get_object())
         return context
+
+    def post(self, request, *args, **kwargs):
+        context = {
+            'pageTitle': 'Modification de l\'article'
+        }
+        article = self.get_object()
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            form.save()
+
+            if request.FILES.get('images'):
+                for image in request.FILES.getlist('images'):
+                    ArticleImage.objects.update_or_create(article=article,image=image)
+            messages.success(request,"La mise de l'article "+article.name+" a été mis à jour ...!")
+            return redirect('articles:list')
+        else:
+            context['form'] = form
+            context['images'] = ArticleImage.objects.filter(article=article)
+        messages.error(request,'La modification a échouée. Veuillez réessayer !')
+        return render(request,'articles/article_detail.html',context)
+
+
 
 
 # Category list view content
