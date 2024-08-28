@@ -1,0 +1,76 @@
+{# templates/customers/customer_main.html #}
+{% extends 'back/base.html' %}
+{% load static %}
+{% block title %}Clients{% endblock title %}
+{% block content %}
+    <section class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards">
+                <div class="col-12">
+                    <!--  alert message -->
+                    {% include 'back/static/flash_message.html' %}
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter card-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>E-mail</th>
+                                        <th>Téléphone</th>
+                                        <th>Créer</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for customer in customers %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex py-1 align-items-center">
+                                                {% if customer.thumbnail  %}
+                                                    <span class="avatar me-2" style="background-image: url({{ customer.thumbnail.url }})"></span>
+                                                {% else %}
+                                                    <span class="avatar me-2">{{ customer.user.username|slice:':2' }}</span>
+                                                {% endif %}
+                                                <div class="flex-fill">
+                                                    <div class="font-weight-medium">{{ customer.user.username }}</div>
+                                                    <div class="text-secondary"><a href="#" class="text-reset">Consulter la carte</a></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-secondary">{{ customer.user.email }}</td>
+                                        <td class="text-secondary">
+                                            {% if customer.phone %}
+                                                {{ customer.phone }}
+                                            {% else %}
+                                                Non renseigné
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-secondary">{{ customer.created|date:'d-m-Y' }}</td>
+                                        <td class="icon">
+                                            <div class="d-flex">
+                                                <button type="button" class="edit customer-item" data-filter="{{ customer.user.username }}${{ customer.user.email }}${{ customer.pk }}" data-bs-toggle="modal" data-bs-target="#modal_content">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                                <button type="button" class="">
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <!-- pagination -->
+                            {% include 'back/static/pagination.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block scripts %}
+    <script src="{% static 'customers/index.js' %}"></script>
+{% endblock scripts %}

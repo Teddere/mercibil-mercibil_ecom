@@ -19,7 +19,22 @@ table .icon button {
     outline: none;
     color: var(--tblr-secondary);
     transition: color 0.3s ease;
+    /*****************/
+
+
 }
+table .icon button.edit {
+    display: inline-flex;
+    gap: .375rem;
+    align-items: center;
+    -webkit-text-decoration-color: rgba(var(--tblr-link-color-rgb), var(--tblr-link-opacity, .5));
+    text-decoration-color: rgba(var(--tblr-link-color-rgb), var(--tblr-link-opacity, .5));
+    text-underline-offset: .25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    color: rgba(var(--tblr-link-color-rgb), var(--tblr-link-opacity, 1));
+}
+
 table .icon button:hover {
     color: var(--tblr-primary);
 }

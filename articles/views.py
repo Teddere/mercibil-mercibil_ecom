@@ -60,8 +60,6 @@ class ArticleListView(ListView):
         context['status'] = False
         return JsonResponse(context)
 
-
-
 # Article create view content
 class ArticleCreateView(CreateView):
     model = Article
