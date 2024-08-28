@@ -52,6 +52,9 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('store:article_detail',kwargs={'slug':self.slug})
 
+    def get_detail_url(self):
+        return None
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_slug()

@@ -16,13 +16,13 @@
                 </div><!-- End Page pre-title -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <button type="button" data-filter="" class="btn btn-primary d-none d-sm-inline-block category-item"  data-bs-toggle="modal" data-bs-target="#modal_content" aria-label="Create new category">
+                        <a href="{% url 'article:new' %}" class="btn btn-primary d-none d-sm-inline-block" role="navigation" >
                             <i class="fa-solid fa-plus me-2"></i>
                             Nouveau
-                        </button>
-                        <button type="button" class="btn btn-primary d-sm-none btn-icon category-item" data-bs-toggle="modal" data-bs-target="#modal_content" aria-label="Create new category">
+                        </a>
+                        <a href="{% url 'article:new' %}"  class="btn btn-primary d-sm-none btn-icon" role="navigation" >
                             <i class="fa-solid fa-plus me-2"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

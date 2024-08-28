@@ -23,3 +23,14 @@ table .icon button {
 table .icon button:hover {
     color: var(--tblr-primary);
 }
+#dropzone-image {
+    border: 2px dashed var(--tblr-muted);
+    background: rgba(238, 241, 244,0.7) ;
+    transition: border-color 0.3s ease;
+}
+#my-dropzoneImage.dz-drag-hover {
+  border-color: var(--tblr-yellow); /* Green when file is hovered */
+}
+#my-dropzoneImage.dz-started {
+  border-color: var(--tblr-form-valid-border-color) /* Yellow when file is dropped */
+}

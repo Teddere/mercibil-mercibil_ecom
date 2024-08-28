@@ -21,7 +21,7 @@ class CategoryForm(forms.ModelForm):
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['name','category','price','stock','genre','label','thumbnail','description']
+        fields = ['name','category','genre','price','stock','label','thumbnail','description']
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control','placeholder':'Article...'}),
             'category': forms.Select(attrs={'class':'form-control','placeholder':'Type d\'article...'}),
@@ -29,16 +29,17 @@ class ArticleForm(forms.ModelForm):
             'stock': forms.NumberInput(attrs={'class':'form-control','placeholder':'Nombre d\'articles'}),
             'genre': forms.Select(choices=GENRE_CHOICES,attrs={'class':'form-control','placeholder':'Sélectionner un genre'}),
             'label': forms.Select(choices=LABEL_CHOICES,attrs={'class':'form-control','placeholder':'Choisissez un label '}),
-            'thumbnail': forms.Select(attrs={'class':'form-control','placeholder':'Sélectionnez une image de l\'article'}),
+            'thumbnail': forms.ClearableFileInput(attrs={'class':'form-control','placeholder':'Sélectionnez une image de l\'article'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description...'}),
         }
         labels = {
             'name': "Nom de l'article",
             'category': "Catégorie",
             'price': "Prix de l'article",
-            'stock': "Nombre de l'article",
+            'stock': "Stock",
             'genre': "Style",
             'label': "Etiquette",
+            'thumbnail': 'Image principale',
             'description': "Description de l'article",
 
 

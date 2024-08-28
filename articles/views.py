@@ -1,18 +1,19 @@
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.contrib import messages
 from django.http import JsonResponse
-from django.views.generic import ListView, DetailView
-from django.shortcuts import render
+from django.views.generic import ListView, UpdateView,CreateView
+from django.shortcuts import render, redirect
 from articles.models import Article,Category,ArticleImage
-from articles.forms import CategoryForm
+from articles.forms import CategoryForm,ArticleForm
 
 
+# Article list view content
 class ArticleListView(ListView):
     model = Article
     template_name = 'articles/article_main.html'
     context_object_name = 'articles'
     paginate_by = 5
-    ordering = ['-created']
+    ordering = ['created']
 
     def paginate_queryset(self, queryset, page_size):
         paginator = self.get_paginator(queryset, page_size)
@@ -26,6 +27,46 @@ class ArticleListView(ListView):
             page_obj = paginator.page(paginator.num_pages)
 
         return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
+# Article create view content
+class ArticleCreateView(CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'articles/article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pageTitle'] = 'Créer un nouvel article'
+        return context
+
+    def post(self, request, *args, **kwargs):
+        context = {
+            'pageTitle': 'Créer un nouvel article'
+        }
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save()
+            if request.FILES.get('images'):
+                for image in request.FILES.getlist('images'):
+                    ArticleImage.objects.create(article=article,image=image)
+
+            messages.success(request, f"L'article {article.name} a été ajouté avec succès !")
+            return redirect('articles:list')
+        else:
+            messages.warning(request, "La création d'un nouvel article a échoué ..!")
+        context['form'] = form
+        return render(request,'articles/article_detail.html',context)
+
+# Article update view content
+class ArticleUpdateView(UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'articles/article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pageTitle']= 'Modification de l\'article'
+        return context
+
 
 # Category list view content
 class CategoryListView(ListView):
