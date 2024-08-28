@@ -1,0 +1,109 @@
+{# templates/article/article_main.html #}
+{% extends 'back/base.html' %}
+{% load static %}
+{% load price_form %}
+{% block title %}Articles{% endblock title %}
+
+{% block content %}
+    <section class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col"><!-- Start Page pre-title -->
+                    <div class="page-pretitle">
+                        Article
+                    </div>
+                    <h2 class="page-title">
+                        Liste articles
+                    </h2>
+                </div><!-- End Page pre-title -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <a href="{% url 'article:new' %}" class="btn btn-primary d-none d-sm-inline-block" role="navigation" >
+                            <i class="fa-solid fa-plus me-2"></i>
+                            Nouveau
+                        </a>
+                        <a href="{% url 'article:new' %}"  class="btn btn-primary d-sm-none btn-icon" role="navigation" >
+                            <i class="fa-solid fa-plus me-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards">
+                <div class="col-12">
+                    <!--  alert message -->
+                    {% include 'back/static/flash_message.html' %}
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter card-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Article</th>
+                                        <th>Catégorie</th>
+                                        <th>Prix</th>
+                                        <th>Stock</th>
+                                        <th>Style</th>
+                                        <th>Etiquette</th>
+                                        <th>Créer</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for article in articles %}
+                                        <tr>
+                                            <td>{{ article.name }}</td>
+                                            <td>
+                                                <a href="#" class="text-reset">{{ article.category.name }}</a>
+                                            </td>
+                                            <td class="text-secondary">{{ article.price|price_form }} XAF</td>
+                                            <td class="text-secondary">{{ article.stock }}</td>
+                                            <td class="text-secondary">
+                                                {% if article.genre == 'woman' %}
+                                                    <span class="badge bg-azure text-azure-fg">Femme</span>
+                                                {% elif article.genre == 'man' %}
+                                                    <span class="badge bg-cyan text-cyan-fg">Homme</span>
+                                                 {% else %}
+                                                    <span class="badge bg-teal text-teal-fg">Mixte</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-secondary">
+                                                {% if article.label == 'sale' %}
+                                                    <span class="badge bg-pink-lt">En solde</span>
+                                                {% elif article.label == 'new' %}
+                                                    <span class="badge bg-green-lt">Nouveau</span>
+                                                {% else %}
+                                                    <span class="badge bg-indigo-lt">Sans</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-secondary">{{ article.created|date:'d-m-Y' }}</td>
+                                            <td class="icon">
+                                                <div class="d-flex">
+                                                    <a href="{{ article.get_detail_url }}" class="icon-link">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <button type="button" class="article-item" data-filter="{{ article.name }}${{ article.pk }}" data-bs-toggle="modal" data-bs-target="#modal_popup">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            {% include 'back/static/pagination.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block scripts %}
+    <script src="{% static 'js/component/widget.js' %}"></script>
+    <script src="{% static 'articles/index.js' %}"></script>
+{% endblock scripts %}

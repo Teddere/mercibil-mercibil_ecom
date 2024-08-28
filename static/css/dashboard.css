@@ -4,12 +4,33 @@
     --tblr-blue: #DA2B6E;
     --tblr-primary: #DA2B6E;
     --tblr-tabler: #DA2B6E;
-    --tblr-primary-rgb: 0, 84, 166;
+    --tblr-primary-rgb: 193, 22, 87;
     --tblr-link-color: #DA2B6E;
-    --tblr-link-hover-color: #DA2B6E;
-    --tblr-font-sans-serif: 'Poppins','Inter',sans-serif;;
+    --tblr-link-hover-color: #E0E3E4;
+    --tblr-font-sans-serif: 'Poppins','Inter',sans-serif;
 }
 i {
-    width: 24px;
-    height: 24px;
+    font-size: 14px;
+}
+
+table .icon button {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--tblr-secondary);
+    transition: color 0.3s ease;
+}
+table .icon button:hover {
+    color: var(--tblr-primary);
+}
+#dropzone-image {
+    border: 2px dashed var(--tblr-muted);
+    background: rgba(238, 241, 244,0.7) ;
+    transition: border-color 0.3s ease;
+}
+#my-dropzoneImage.dz-drag-hover {
+  border-color: var(--tblr-yellow); /* Green when file is hovered */
+}
+#my-dropzoneImage.dz-started {
+  border-color: var(--tblr-form-valid-border-color) /* Yellow when file is dropped */
 }

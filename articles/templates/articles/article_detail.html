@@ -1,0 +1,120 @@
+{# templates/articles/article_detail.html #}
+{% extends 'back/base.html' %}
+{% load static %}
+{% load form_field %}
+{% block title %}Article{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/libraries/dropzone.css' %}">
+{% endblock style %}
+{% block content %}
+    <section class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col"><!-- Start Page pre-title -->
+                    <div class="page-pretitle">
+                        Article
+                    </div>
+                    <h2 class="page-title">
+                        {{ pageTitle }}
+                    </h2>
+                </div><!-- End Page pre-title -->
+            </div>
+        </div>
+    </section>
+    <section class="page-body">
+        <div class="container-xl">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    {% include 'back/static/flash_message.html' %}
+                    <div class="card">
+                        <form id="art-form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row py-4">
+                                {% for field in form %}
+                                    {% if field.id_for_label == 'id_category' or field.id_for_label == 'id_genre' %}
+                                        <div class="col-md-6 mb-2 px-4">
+                                            <div class="form-group">
+                                                <label for="{{ field.id_for_label }}" class="form-label required">{{ field.label }}</label>
+                                                {% if field.errors %}
+                                                    {{ field|add_class:'form-control is-invalid' }}
+                                                    <div class="invalid-feedback">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% elif field.id_for_label == 'id_price' %}
+                                        <div class="col-6 col-sm-7 col-lg-9 ps-4 pe-2 mb-2">
+                                            <div class="form-group">
+                                                <label for="{{ field.id_for_label }}" class="form-label required">{{ field.label }}</label>
+                                                {% if field.errors %}
+                                                    {{ field|add_class:'form-control is-invalid' }}
+                                                    <div class="invalid-feedback">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% elif field.id_for_label == 'id_stock' %}
+                                        <div class="col-6 col-sm-5 col-lg-3 px-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="{{ field.id_for_label }}" class="form-label required">{{ field.label }}</label>
+                                                {% if field.errors %}
+                                                    {{ field|add_class:'form-control is-invalid' }}
+                                                    <div class="invalid-feedback">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                            <div class="col-md-12 mb-2 px-4">
+                                                <div class="form-group">
+                                                    <label for="{{ field.id_for_label }}" class="form-label required">{{ field.label }}</label>
+                                                    {% if field.errors %}
+                                                        {{ field|add_class:'form-control is-invalid' }}
+                                                        <div class="invalid-feedback">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                    {% else %}
+                                                        {{ field }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="col-md-12 px-4 mb-4">
+                                    <div class="form-group">
+                                        <div class="dropzone" id="dropzone-image"></div>
+                                    </div>
+                                </div>
+                                {% if images %}
+                                    <div class="row mb-2">
+                                    {% for art in images %}
+                                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1 mx-2">
+                                            <img src="{{ art.image.url }}" alt="{{ art.article.name }}-image" class="img-fluid">
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="col-md-12 px-4">
+                                    <div id="btnForm" class="btn btn-primary w-100">Valider</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block scripts %}
+    <script src="{% static 'js/libraries/dropzone-min.js' %}"></script>
+    <script src="{% static 'articles/index.js' %}"></script>
+{% endblock scripts %}

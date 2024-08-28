@@ -1,5 +1,9 @@
 {% load static %}
 {% url 'store:home' as path_to_home_page %}
+{% url 'store:dashboard' as path_to_dashboard %}
+{% url 'article:category_list' as path_to_categories %}
+{% url 'article:list' as path_to_articles %}
+{% url 'article:new' as path_to_new_article %}
 <header class="navbar navbar-expand-md d-print-none" ><!-- start navbar top -->
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +90,7 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav"><!-- start main nav item-->
-                    <li class="nav-item active"><!-- start item nav -->
+                    <li class="nav-item {% if request.path == path_to_dashboard %}active{% endif %}"><!-- start item nav -->
                         <a class="nav-link" href="#" >
                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                <i class="fa-solid fa-house"></i>
@@ -94,7 +98,7 @@
                             <span class="nav-link-title">Dashboard</span>
                         </a>
                     </li><!-- end item nav -->
-                    <li class="nav-item dropdown"><!-- start item nav -->
+                    <li class="nav-item dropdown {% if request.path == path_to_categories or request.path == path_to_articles or request.path == path_to_new_article %}active{% endif %}"><!-- start item nav -->
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                <i class="fa-solid fa-list"></i>
@@ -102,8 +106,9 @@
                             <span class="nav-link-title">Articles</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item"  rel="Articles">Articles</a>
-                            <a href="#" class="dropdown-item"  rel="Catégorie">Catégories</a>
+                            <a href="{{ path_to_new_article }}" class="dropdown-item">Nouvau article</a>
+                            <a href="{{ path_to_articles }}" class="dropdown-item"  rel="Articles">Articles</a>
+                            <a href="{{ path_to_categories }}" class="dropdown-item"  rel="Catégorie">Catégories</a>
                         </div>
                     </li><!-- end item nav -->
                     <li class="nav-item dropdown"><!-- start item nav -->

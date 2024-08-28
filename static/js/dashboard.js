@@ -26,6 +26,5 @@
 
 }));
 $(document).ready(function(){
-	console.log("Allo")
 	$('#copyright').html(new Date().getFullYear())
 })
