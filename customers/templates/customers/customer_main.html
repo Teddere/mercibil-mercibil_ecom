@@ -48,7 +48,7 @@
                                         <td class="text-secondary">{{ customer.created|date:'d-m-Y' }}</td>
                                         <td class="icon">
                                             <div class="d-flex">
-                                                <button type="button" class="edit customer-item" data-filter="{{ customer.user.username }}${{ customer.user.email }}${{ customer.pk }}" data-bs-toggle="modal" data-bs-target="#modal_content">
+                                                <button type="button" class="edit customer-item" data-filter="{{ customer.pk }}${{ customer.user.username }}${{ customer.user.email }}${{ customer.phone }}" data-bs-toggle="modal" data-bs-target="#modal_content">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                                 <button type="button" class="">
@@ -72,5 +72,6 @@
     </section>
 {% endblock content %}
 {% block scripts %}
+    <script src="{% static 'js/component/widget.js' %}"></script>
     <script src="{% static 'customers/index.js' %}"></script>
 {% endblock scripts %}
