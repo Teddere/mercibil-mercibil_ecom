@@ -8,6 +8,9 @@
 {% endblock style %}
 {% block scripts %}
     <script src="{% static 'js/libraries/swiper-bundle.min.js' %}"></script>
+    <script>
+        let csrf = '{{ csrf_token }}'
+    </script>
     <script src="{% static 'store/main.js' %}"></script>
 {% endblock scripts %}
 
@@ -129,7 +132,11 @@
                                 <ul class="article-hover"><!--Start hover button -->
                                     <li><a href="#"><i class="fa-solid fa-expand"></i></a></li>
                                     <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                                    <li><a href="#"><i class="fa-solid fa-plus"></i></a></li>
+                                    <li>
+                                        <a href="#" type="button" class="addCart" data-article="{{ article.id }}">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+                                    </li>
                                 </ul><!--End hover button -->
                             </div>
                         <div class="article-down">

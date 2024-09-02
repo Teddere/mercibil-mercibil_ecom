@@ -1,6 +1,7 @@
 {# templates/store/main_cart.html #}
 {% extends 'front/base.html' %}
 {% block title %}Panier{% endblock title %}
+{% load price_form %}
 {% load static %}
 {% block content %}
     <section class="subheader-section"><!-- Start breadcrumb-->
@@ -30,78 +31,39 @@
                                     <th class="column-4">Quantité</th>
                                     <th class="column-5">Total</th>
                                 </tr>
-                                <tr class="table-item">
-                                    <td class="column-1">
-                                        <div class="cart-image">
-                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">
-                                        <span class="cart-name">Fresh Strawberries</span>
-                                        <span class="cart-category">Fresh Strawberries</span>
-                                    </td>
-                                    <td class="column-3">150.000 XAF</td>
-                                    <td class="column-4">
+                                {% for item in cart_articles %}
+                                    <tr class="table-item">
+                                        <td class="column-1">
+                                            <div class="cart-image">
+                                                <img src="{{ item.article.thumbnail.url }}" alt="IMG Product">
+                                            </div>
+                                        </td>
+                                        <td class="column-2">
+                                            <span class="cart-name">{{ item.article.name }}</span>
+                                            <span class="cart-category">{{ item.article.category.name }}</span>
+                                        </td>
+                                        <td class="column-3">{{ item.article.price | price_form }} XAF</td>
+                                        <td class="column-4">
                                         <div class="cart-num d-flex flex-wrap me-0 ms-auto">
                                             <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-minus"></i>
                                             </div>
-                                            <input type="number" value="1" min="1"  name="" id="" class="cart-qte-num text-center" />
+                                            <input type="number" value="{{ item.quantity }}" min="1"  name="cart_item_num" id="cart_item_num" class="cart-qte-num text-center" />
                                             <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-plus"></i>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="column-5">200.230 XAF</td>
-                                </tr>
-                                <tr class="table-item">
-                                    <td class="column-1">
-                                        <div class="cart-image">
-                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">
-                                        <span class="cart-name">Fresh Strawberries</span>
-                                        <span class="cart-category">Fresh Strawberries</span>
-                                    </td>
-                                    <td class="column-3">150.000 XAF</td>
-                                    <td class="column-4">
-                                        <div class="cart-num d-flex flex-wrap me-0 ms-auto">
-                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </div>
-                                            <input type="number" name="" id="" class="cart-qte-num text-center" />
-                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">200.230 XAF</td>
-                                </tr>
-                                <tr class="table-item">
-                                    <td class="column-1">
-                                        <div class="cart-image">
-                                            <img src="{% static 'files/product/close-up-2.png' %}" alt="IMG Product">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">
-                                        <span class="cart-name">Fresh Strawberries</span>
-                                        <span class="cart-category">Fresh Strawberries</span>
-                                    </td>
-                                    <td class="column-3">150.000 XAF</td>
-                                    <td class="column-4">
-                                        <div class="cart-num d-flex flex-wrap me-0 ms-auto">
-                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </div>
-                                            <input type="number" name="" id="" class="cart-qte-num text-center" />
-                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">200.230 XAF</td>
-                                </tr>
+                                        <td class="column-5">{{ item.total_price|price_form }} XAF</td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted py-3">
+
+                                            Aucun article dans le panier
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
                             </table>
                         </div>
@@ -123,7 +85,7 @@
                                 <span>Total : </span>
                             </div>
                             <div class="cart-current-price">
-                                <span>$79.65</span>
+                                <span>{{ cart_total | price_form}} XAF</span>
                             </div>
                         </div>
                         <div class="cart-prod-detail d-flex flex-wrap align-items-start">

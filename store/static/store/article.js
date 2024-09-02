@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
     let sw_small = new Swiper('.detail-article',{
         spaceBetween: 10,
         slidesPerView: 4,
@@ -37,5 +39,21 @@ $(document).ready(function () {
     $('.btn-num-up').on('click',function (){
         let numProduct=Number($(this).prev().val());
         $(this).prev().val(numProduct + 1)
+    });
+    // Add cart
+    $('#add_cart').on('click',(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+
+        let cartNum = $('#cart_num');
+        let dataForm = new FormData();
+        dataForm.append('csrfmiddlewaretoken',csrf);
+        dataForm.append('article_id',)
+
+        $.ajax({
+            url: '/cart/add/',
+            type: 'POST',
+            data: dataForm
+        });
     });
 });

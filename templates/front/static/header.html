@@ -1,7 +1,7 @@
 {% url 'store:home' as path_to_home_page %}
 {% url 'store:cart' as path_to_cart_page %}
 {% url 'store:login' as path_to_login_page %}
-{% url 'store:cart' as path_to_cart_page %}
+{% url 'cart:list' as path_to_cart_page %}
 {% url 'store:catalog_detail' 'bijoux' as path_to_catalog_bijoux %}
 {% load static %}
 <header class="header-section"><!--Start header section-->
@@ -56,7 +56,7 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                     <div class="shopping-num d-flex justify-content-center align-items-center">
-                        <div class="number">9+</div>
+                        <div id="cart_num_total" class="number">{{ cart|length }}</div>
                     </div>
                 </li>
                 <li class="nav-icon-item">
