@@ -9,6 +9,9 @@ $(document).ready(function() {
         {'label':'Adresse email','name':'email','field':'email'},
         {'label':'Numéro de téléphone','name':'phone','field':'tel'},
     ]
+    // Delete Customer
+    let customerElement = $('.customer');
+    let btnPopup = $('#popup-btn');
 
     // Customer item click
     customerItem.each(function () {
@@ -70,4 +73,31 @@ $(document).ready(function() {
             }
         })
     });
+
+    // Customer click
+    customerElement.each(function () {
+        $(this).on('click',()=>{
+            let item = $(this).data('filter');
+            inputItem = item.split('$');
+            let msg = `Le client ${inputItem[1].replace('_',' ')} va être définitivement supprimer.`
+            modalPopupContent('danger','Êtes-vous de vouloir supprimer ?',msg);
+        });
+    });
+    btnPopup.on('click',() => {
+        let dataForm = new FormData();
+        dataForm.append('csrfmiddlewaretoken',csrf);
+        dataForm.append('id',inputItem[0]);
+
+        $.ajax({
+            type:'POST',
+            url: '/dashboard/customer/delete/',
+            data: dataForm,
+            contentType: false,
+            processData: false,
+            complete: function(){
+                location.reload();
+            },
+        });
+    })
+
 });

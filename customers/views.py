@@ -16,6 +16,17 @@ class CustomerListView(ListView):
     paginate_by = 6
     ordering = '-created'
 
+    def paginate_queryset(self, queryset, page_size):
+        paginator = self.get_paginator(queryset, page_size)
+        page = self.request.GET.get('page')
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
+
     def post(self, request, *args, **kwargs):
         context = {}
 
@@ -74,3 +85,20 @@ class CustomerListView(ListView):
                 context['status'] = 'warning'
                 context['message'] = 'Les formations entrées ne sont pas acceptables !'
                 return JsonResponse(context,status=400)
+
+def customer_delete(request):
+    context = {}
+    if request.method == 'POST' and request.POST.get('id'):
+        customer_id = request.POST.get('id')
+        try:
+            customer = Customer.objects.get(id=customer_id)
+            name = customer.user.username.replace('_',' ')
+            customer.delete()
+            messages.success(request,f"Le client {name} a bien été supprimer sur la plateforme !")
+            context['status'] = True
+        except Customer.DoesNotExist:
+            context['status'] = False
+            messages.error(request,"Le client n'existe pas sur la plateforme !")
+            return JsonResponse(context,status=400)
+        return JsonResponse(context)
+

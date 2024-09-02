@@ -76,7 +76,7 @@
                                                     <button type="button" class="edit customer-item" data-filter="{{ customer.pk }}${{ customer.user.username }}${{ customer.user.email }}${{ customer.phone }}" data-bs-toggle="modal" data-bs-target="#modal_content">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
-                                                    <button type="button">
+                                                    <button type="button" class="customer" data-filter="{{ customer.pk }}${{ customer.user.username }}" data-bs-toggle="modal" data-bs-target="#modal_popup">
                                                         <i class="fa-regular fa-trash-can"></i>
                                                     </button>
                                                 </div>

@@ -60,7 +60,7 @@ $(document).ready(function() {
             let item = $(this).data('filter');
             itemName = item.split('$');
             let msg = `La catégorie ${itemName[0]} va être définitivement supprimer.`
-            modalPopupContent('danger','Êtes-vous de vouloir supprimer ?',msg)
+            modalPopupContent('danger','Êtes-vous de vouloir supprimer ?',msg);
         })
     });
 
