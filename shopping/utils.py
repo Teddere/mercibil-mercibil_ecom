@@ -1,5 +1,6 @@
 import logging
 from django.conf import settings
+from concurrent.futures import ThreadPoolExecutor
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
@@ -16,6 +17,9 @@ def send_email(subject:str,receivers:list,template:str,context:dict):
             receivers,
             fail_silently=False
         )
+        with ThreadPoolExecutor() as executor:
+            future = executor.submit(send_mail)
+            future.result()
         return True
     except Exception as e:
         logger.error(e)

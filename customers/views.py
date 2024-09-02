@@ -1,14 +1,13 @@
-from django.http import JsonResponse
 from django.views.generic import ListView
+from django.contrib import messages
 from django.core.paginator import PageNotAnInteger, EmptyPage
-from customers.models import Customer
+from django.http import JsonResponse,QueryDict
 # Email function send
 from shopping.utils import send_email
 # form customer
-from customers.forms import CustomerForm
+from customers.models import Customer
+from customers.forms import  CustomerCreateForm, CustomerUpdateForm
 from customers.utils import generate_password
-from datetime import datetime
-
 
 class CustomerListView(ListView):
     model = Customer
@@ -17,58 +16,61 @@ class CustomerListView(ListView):
     paginate_by = 6
     ordering = '-created'
 
-    def paginate_queryset(self, queryset, page_size):
-        paginator = self.get_paginator(queryset, page_size)
-        page = self.request.GET.get('page')
-
-        try:
-            page_obj = paginator.page(page)
-        except PageNotAnInteger:
-            page_obj = paginator.page(1)
-        except EmptyPage:
-            page_obj = paginator.page(paginator.num_pages)
-
-        return (paginator,page_obj,page_obj.object_list,page_obj.has_other_pages())
-
     def post(self, request, *args, **kwargs):
-        context = { }
+        context = {}
 
-        customer_id = request.POST.get('id') if request.POST.get('id') else None
-
-        if customer_id != 'undefined' and customer_id is not None:
+        customer_id = request.POST.get('id', None)
+        post_data = request.POST.copy()
+        post_data['username'] = post_data['username'].replace(' ', '_').title()
+        # update customer data
+        if customer_id and customer_id != 'undefined':
             try:
                 customer = Customer.objects.get(id=customer_id)
             except Customer.DoesNotExist:
                 context['status'] = 'danger'
-                context['message'] = 'Cette action ne peut être exécuter !'
-                return JsonResponse(context, status=400)
+                context['message'] = "Ce client n'existe pas sur la plateforme !"
+                return JsonResponse(context,status=400)
+
+            form = CustomerUpdateForm(post_data, instance=customer,user=customer.user)
+            if form.is_valid():
+                form.save()
+                # Sending emails
+                template_email = "customers/customer_email.html"
+                subject = "Modification de données client"
+                receivers = ['localhost']
+                context_email = {
+                    'username': post_data['username'].replace('_', ' ').title(),
+                    'email': post_data['email'],
+                    'phone': post_data['phone'],
+                }
+                send_email(subject,receivers,template_email, context_email)
+                context['status'] = 'success'
+                messages.success(request, f'Les informations du client {post_data['username']} ont été mis à jour')
+                return JsonResponse(context,status=200)
+        # Create customer data
         else:
-            customer = None
-
-        form = CustomerForm(request.POST,instance=customer,user=customer.user)
-        if form.is_valid():
-            form.save()
-            # Send email
-            template_email = 'customers/customer_mail.html'
-            receivers = ['localhost']
-            context_mail = {
-                'username': request.POST.get('username'),
-                'email': request.POST.get('email'),
-                'phone': request.POST.get('phone'),
-            }
-            send_email('Modification de données client',receivers,template_email,context_mail)
-            context['status'] = 'success'
-            context['message'] = 'Les informations du clients ont été modifier avec succès !'
-        return JsonResponse(context)
-
-
-
-
-
-
-
-
-
-
-
-
+            post_data['password'] = generate_password()
+            form = CustomerCreateForm(post_data)
+            if form.is_valid():
+                shopper = form.save()
+                if form.cleaned_data['phone']:
+                    shopper.customer.phone = form.cleaned_data['phone']
+                    shopper.customer.save()
+                # Sending emails
+                template_email = "customers/customer_email.html"
+                subject = "Nouveau client"
+                receivers = ['localhost']
+                context_email = {
+                        'username': post_data['username'].replace('_', ' ').title(),
+                        'email': post_data['email'],
+                        'phone': post_data['phone'],
+                        'password': post_data['password'],
+                    }
+                send_email(subject, receivers, template_email, context_email)
+                context['status'] = 'success'
+                messages.success(request,f'Le client {shopper.username} a bien été rajouter dans la liste des clients')
+                return JsonResponse(context)
+            else:
+                context['status'] = 'warning'
+                context['message'] = 'Les formations entrées ne sont pas acceptables !'
+                return JsonResponse(context,status=400)

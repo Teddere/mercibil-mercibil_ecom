@@ -3,6 +3,31 @@
 {% load static %}
 {% block title %}Clients{% endblock title %}
 {% block content %}
+    <section class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col"><!-- Start Page pre-title -->
+                    <div class="page-pretitle">
+                        Clients
+                    </div>
+                    <h2 class="page-title">
+                        Liste clients
+                    </h2>
+                </div><!-- End Page pre-title -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <button type="button" class="btn btn-primary d-none d-sm-inline-block customer-item" role="button" data-filter="" data-bs-toggle="modal" data-bs-target="#modal_content">
+                            <i class="fa-solid fa-plus me-2"></i>
+                            Nouveau
+                        </button>
+                        <button type="button"   class="btn btn-primary d-sm-none btn-icon customer-item" role="button" data-filter="" data-bs-toggle="modal" data-bs-target="#modal_content" >
+                            <i class="fa-solid fa-plus me-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="page-body">
         <div class="container-xl">
             <div class="row row-cards">
@@ -23,40 +48,40 @@
                                 </thead>
                                 <tbody>
                                     {% for customer in customers %}
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                {% if customer.thumbnail  %}
-                                                    <span class="avatar me-2" style="background-image: url({{ customer.thumbnail.url }})"></span>
-                                                {% else %}
-                                                    <span class="avatar me-2">{{ customer.user.username|slice:':2' }}</span>
-                                                {% endif %}
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">{{ customer.user.username }}</div>
-                                                    <div class="text-secondary"><a href="#" class="text-reset">Consulter la carte</a></div>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex py-1 align-items-center">
+                                                    {% if customer.thumbnail  %}
+                                                        <span class="avatar me-2" style="background-image: url({{ customer.thumbnail.url }})"></span>
+                                                    {% else %}
+                                                        <span class="avatar me-2">{{ customer.user.username|slice:':2' }}</span>
+                                                    {% endif %}
+                                                    <div class="flex-fill">
+                                                        <div class="font-weight-medium">{{ customer.user.username }}</div>
+                                                        <div class="text-secondary"><a href="#" class="text-reset">Consulter la carte</a></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-secondary">{{ customer.user.email }}</td>
-                                        <td class="text-secondary">
-                                            {% if customer.phone %}
-                                                {{ customer.phone }}
-                                            {% else %}
-                                                Non renseigné
-                                            {% endif %}
-                                        </td>
-                                        <td class="text-secondary">{{ customer.created|date:'d-m-Y' }}</td>
-                                        <td class="icon">
-                                            <div class="d-flex">
-                                                <button type="button" class="edit customer-item" data-filter="{{ customer.pk }}${{ customer.user.username }}${{ customer.user.email }}${{ customer.phone }}" data-bs-toggle="modal" data-bs-target="#modal_content">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
-                                                <button type="button" class="">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="text-secondary">{{ customer.user.email }}</td>
+                                            <td class="text-secondary">
+                                                {% if customer.phone %}
+                                                    {{ customer.phone }}
+                                                {% else %}
+                                                    Non renseigné
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-secondary">{{ customer.created|date:'d-m-Y' }}</td>
+                                            <td class="icon">
+                                                <div class="d-flex">
+                                                    <button type="button" class="edit customer-item" data-filter="{{ customer.pk }}${{ customer.user.username }}${{ customer.user.email }}${{ customer.phone }}" data-bs-toggle="modal" data-bs-target="#modal_content">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <button type="button">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>

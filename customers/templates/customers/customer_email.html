@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <body>
+        <h3>Bonjour {{ username }}</h3>
+        {% if password %}
+            <p>
+                Nous venons de créer votre nouveau compte client avec ci-joint vos information
+                d'authentification:
+            </p>
+        {% else %}
+            <p>
+                Nous venons d'effectués une modification nos information personnelle.<br>
+                Vous trouverez ci-joint les informations mise à jour :
+            </p>
+        {% endif %}
+        <ul>
+            <li>Nom utilisateur : {{ username }}</li>
+            <li>Adresse email : {{ email }}</li>
+            {% if phone %}
+            <li>Téléphone : {{ phone }}</li>
+            {% endif %}
+            {% if password %}
+            <li>Mot de passe actuel : {{ password }}</li>
+            {% endif %}
+        </ul>
+        <p>Vous pouvez toujours modifié ces informations vous concernant à tout moment</p>
+    </body>
+</html>
