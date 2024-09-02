@@ -4,6 +4,8 @@
 {% url 'article:category_list' as path_to_categories %}
 {% url 'article:list' as path_to_articles %}
 {% url 'article:new' as path_to_new_article %}
+{% url 'customer:list' as path_to_customer %}
+{% url 'customer:create' as path_to_customer_new %}
 <header class="navbar navbar-expand-md d-print-none" ><!-- start navbar top -->
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,8 +121,8 @@
                             <span class="nav-link-title">Clients</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item"  rel="new customer">Nouveau</a>
-                            <a href="#" class="dropdown-item"  rel="list customer">Liste des clients</a>
+                            <a href="{{ path_to_customer_new }}" class="dropdown-item"  rel="new customer">Nouveau</a>
+                            <a href="{{ path_to_customer }}" class="dropdown-item"  rel="list customer">Liste des clients</a>
                         </div>
                     </li><!-- end item nav -->
                     <li class="nav-item dropdown"><!-- start item nav -->

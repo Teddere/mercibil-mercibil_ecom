@@ -14,6 +14,23 @@
         <title>{% block title %}{% endblock title %}-Mercibil</title>
     </head>
     <body>
+        <div class="page-loader d-flex flex-column">
+            <div class="page page-center">
+                <div class="container container-slim py-4">
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <a href="#" class="navbar-brand navbar-brand-autodark">
+                                    <img src="{% static 'files/website/logo.png' %}" height="40" alt="LOGO WEBSITE">
+                                </a>
+                            <div class="text-secondary mb-3">Chargement...</div>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-indeterminate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <main class="page">
             {% include 'back/static/header.html' %}
             <div class="page-wrapper">

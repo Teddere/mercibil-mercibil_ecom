@@ -1,7 +1,9 @@
-from django.views.generic import ListView
+from django.shortcuts import redirect, render
+from django.views.generic import ListView,CreateView
 from django.contrib import messages
 from django.core.paginator import PageNotAnInteger, EmptyPage
-from django.http import JsonResponse,QueryDict
+from django.http import JsonResponse
+from users.models import Shopper
 # Email function send
 from shopping.utils import send_email
 # form customer
@@ -85,6 +87,51 @@ class CustomerListView(ListView):
                 context['status'] = 'warning'
                 context['message'] = 'Les formations entrées ne sont pas acceptables !'
                 return JsonResponse(context,status=400)
+
+class CustomerCreateView(CreateView):
+    model = Shopper
+    form_class = CustomerCreateForm
+    template_name = 'customers/customer_new.html'
+
+    def post(self, request, *args, **kwargs):
+        context = {}
+        post_data = request.POST.copy()
+        post_data['username'] = post_data['username'].replace(' ', '_').title()
+        post_data['password'] = generate_password()
+        form = CustomerCreateForm(post_data)
+        if form.is_valid():
+            shopper = form.save()
+            if form.cleaned_data['phone']:
+                shopper.customer.phone = form.cleaned_data['phone']
+                shopper.customer.save()
+            # Sending emails
+            template_email = "customers/customer_email.html"
+            subject = "Nouveau client"
+            receivers = ['localhost']
+            context_email = {
+                'username': post_data['username'].replace('_', ' ').title(),
+                'email': post_data['email'],
+                'phone': post_data['phone'],
+                'password': post_data['password']
+            }
+            send_email(subject, receivers, template_email, context_email)
+            context['status'] = 'success'
+            messages.success(request, f'Le client {shopper.username} a bien été rajouter dans la liste des clients')
+            return redirect('customer:list')
+        else:
+            errors_messages = []
+            for field,errors in form.errors.items():
+                for error in errors:
+                    errors_messages.append(f'{field}: {error}')
+            error_msg = ' '.join(errors_messages)
+            messages.warning(request, f"Le client n'a pas pu être créer ! Erreurs : {error_msg}")
+
+            context['status'] = 'warning'
+
+            return render(request, self.template_name, context)
+
+
+
 
 def customer_delete(request):
     context = {}

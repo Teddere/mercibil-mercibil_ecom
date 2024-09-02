@@ -27,4 +27,7 @@
 }));
 $(document).ready(function(){
 	$('#copyright').html(new Date().getFullYear())
+	$('.page-loader').fadeOut('slow',function() {
+		$(this).remove();
+	});
 })

@@ -49,3 +49,13 @@ table .icon button:hover {
 #my-dropzoneImage.dz-started {
   border-color: var(--tblr-form-valid-border-color) /* Yellow when file is dropped */
 }
+
+.page-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10 !important;
+    background: #f6f8fb;
+}

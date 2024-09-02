@@ -1,0 +1,58 @@
+{# templates/customers/customer_new.html #}
+{% extends 'back/base.html' %}
+{% block title %}Create_customer{% endblock title %}
+{% block content %}
+    <section class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col"><!-- Start Page pre-title -->
+                    <div class="page-pretitle">
+                        Client
+                    </div>
+                    <h2 class="page-title">
+                        Création d'un nouveau client
+                    </h2>
+                </div><!-- End Page pre-title -->
+            </div>
+        </div>
+    </section>
+    <section class="page-body">
+        <div class="container-xl">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-6">
+                    {% include 'back/static/flash_message.html' %}
+                    <div class="card">
+                        <form id="cust-form" method="post">
+                            {% csrf_token %}
+                            <div class="row py-4">
+                                <div class="col-lg-12 mb-2 px-4">
+                                    <div class="form-group">
+                                        <label for="username" class="form-label required">Nom d'utilisateur</label>
+                                        <input type="text" name="username" id="username" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-2 px-4">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label required">E-mail</label>
+                                        <input type="email" name="email" id="email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-2 px-4">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">Téléphone</label>
+                                        <input type="tel" name="phone" id="phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 px-4">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary w-100">Créer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

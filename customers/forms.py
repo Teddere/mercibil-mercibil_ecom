@@ -5,7 +5,7 @@ from customers.models import Customer
 User = Shopper
 
 class CustomerCreateForm(forms.ModelForm):
-    phone = forms.CharField(max_length=20)
+    phone = forms.CharField(max_length=20,required=False)
     class Meta:
         model = User
         fields = ['username','email','password','phone']
