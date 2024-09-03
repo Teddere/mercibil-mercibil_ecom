@@ -1,4 +1,4 @@
-{# templates/store/main_cart.html #}
+{# templates/cart/main.html #}
 {% extends 'front/base.html' %}
 {% block title %}Panier{% endblock title %}
 {% load price_form %}
@@ -34,7 +34,7 @@
                                 {% for item in cart_articles %}
                                     <tr class="table-item">
                                         <td class="column-1">
-                                            <div class="cart-image">
+                                            <div class="cart-image" data-filter="{{ item.article.pk }}">
                                                 <img src="{{ item.article.thumbnail.url }}" alt="IMG Product">
                                             </div>
                                         </td>
@@ -45,13 +45,13 @@
                                         <td class="column-3">{{ item.article.price | price_form }} XAF</td>
                                         <td class="column-4">
                                         <div class="cart-num d-flex flex-wrap me-0 ms-auto">
-                                            <div class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
+                                            <label for="cart_item_num" data-filter="{{ item.article.pk }}" class="cart-btn-down cart-qte d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-minus"></i>
-                                            </div>
-                                            <input type="number" value="{{ item.quantity }}" min="1"  name="cart_item_num" id="cart_item_num" class="cart-qte-num text-center" />
-                                            <div class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
+                                            </label>
+                                            <input type="number" value="{{ item.quantity }}" min="1" max="{{ item.article.stock }}"  name="cart_item_num" id="cart_item_num" class="cart-qte-num text-center" />
+                                            <label for="cart_item_num" data-filter="{{ item.article.pk }}" class="cart-btn-up cart-qte d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-plus"></i>
-                                            </div>
+                                            </label>
                                         </div>
                                     </td>
                                         <td class="column-5">{{ item.total_price|price_form }} XAF</td>
@@ -121,5 +121,5 @@
     </section>
 {% endblock content %}
 {% block scripts %}
-    <script src="{% static 'store/cart.js' %}"></script>
+    <script src="{% static 'cart/index.js' %}"></script>
 {% endblock scripts %}

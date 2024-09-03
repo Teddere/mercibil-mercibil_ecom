@@ -24,4 +24,34 @@ $(document).ready(function (){
 
     // Footer
   document.querySelector('#copyright-date').innerHTML=new Date().getFullYear();
+    // Button add cart
+  if(document.querySelectorAll('.addCart')){
+    let btnCart = $('.addCart');
+    btnCart.each(function() {
+        $(this).on('click',(e)=>{
+            e.preventDefault();
+            let item = $(this).data('article');
+            let dataForm = new FormData();
+            dataForm.append('csrfmiddlewaretoken',csrf);
+            dataForm.append('article_id',item);
+            dataForm.append('action','post')
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/',
+                data: dataForm,
+                contentType: false,
+                processData: false,
+                success: function (res){
+                    document.getElementById('cart_num_total').textContent = res.quantity
+                    generateToast("Article ajouté au panier",)
+                },
+                error: function (xhr,errmsg,err){
+                    console.log(err)
+                }
+            })
+
+
+        });
+    });
+  }
 });

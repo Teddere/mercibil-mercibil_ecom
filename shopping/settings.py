@@ -133,6 +133,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'store' / 'static',
     BASE_DIR / 'articles' / 'static',
     BASE_DIR / 'customers' / 'static',
+    BASE_DIR / 'cart' / 'static',
 ]
 
 MEDIA_URL = '/media/'

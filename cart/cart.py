@@ -15,22 +15,31 @@ class Cart():
         # Accessibilité du panier
         self.cart = cart
 
-    def add(self,article,quantity=1):
+    def add(self,article,quantity=1,override=False):
         art_id = str(article.id)
         if art_id not in self.cart:
             self.cart[art_id] = {
                 'quantity':quantity,
                 'price': str(article.price)
             }
+        if override:
+            self.cart[art_id]['quantity'] = quantity
         else:
             self.cart[art_id]['quantity'] += quantity
-        print(self.cart)
+        self.session.modified = True
+
+    def update(self,article,quantity=1):
+        art_id = str(article.id)
+        if art_id in self.cart:
+            self.cart[art_id]['quantity'] -= quantity
         self.session.modified = True
 
     def remove(self,article):
         art_id = str(article.id)
         if art_id in self.cart:
+            print('Entrer')
             del self.cart[art_id]
+        print(self.cart)
         self.session.modified = True
 
     def get_total(self):
