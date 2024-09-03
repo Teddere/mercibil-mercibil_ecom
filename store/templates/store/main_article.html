@@ -84,24 +84,25 @@
                         {{ article.price | price_form }} XAF
                     </div>
                     <p>{{ article.description|truncatechars:140 }}</p>
-                    <div class="article-btn">
+                    <form class="article-btn">
+                        {% csrf_token %}
                         <div class="article-qty">
                             <span>Quantité :</span>
                             <div class="art-num d-flex flex-nowrap">
                                 <label for="cart_num" class="btn-num-down qty-num d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-minus"></i>
                                 </label>
-                                <input type="text" name="cart_num" id="cart_num" value="1" class="qty-value" />
+                                <input type="text" name="cart_num" id="cart_num" value="1"  class="qty-value" />
                                 <label for="cart_num" class="btn-num-up qty-num d-flex justify-content-center align-items-center">
                                     <i class="fa-solid fa-plus"></i>
                                 </label>
                             </div>
                         </div>
-                        <button type="button" class="art-cart-add d-flex justify-content-center align-items-center">
+                        <button type="submit" id="add_cart" value="{{ article.pk }}" class="art-cart-add d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-shopping-bag"></i>
                             Ajouter
                         </button>
-                    </div>
+                    </form>
                     <div class="art-detail-widget">
                         <ul>
                             <li>

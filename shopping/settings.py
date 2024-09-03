@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Applition
     "store.apps.StoreConfig",
+    "cart.apps.CartConfig",
     "articles.apps.ArticlesConfig",
     "sales.apps.SalesConfig",
     "profiles.apps.ProfilesConfig",
     "users.apps.UsersConfig",
-    "customers"
+    "customers",
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Cart
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -130,6 +133,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'store' / 'static',
     BASE_DIR / 'articles' / 'static',
     BASE_DIR / 'customers' / 'static',
+    BASE_DIR / 'cart' / 'static',
 ]
 
 MEDIA_URL = '/media/'
@@ -143,6 +147,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User Authentification
 AUTH_USER_MODEL = 'users.User'
 
+# Cart app
+CART_SESSION_ID = 'cart'
 # Email configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

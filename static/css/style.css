@@ -407,15 +407,17 @@ p {
 }
 /* **************** Header - nav icon cart number **********************/
 .nav-icon .nav-icon-item.shopping-icon .shopping-num .number{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     width: 100%;
-    height: 100%;
-    padding: 0 1.2px ;
-    font-size: calc(var(--size) - 6px);
-    font-style: italic;
+    font-size: calc(var(--size) - 4px);
     font-weight: 600;
     border-radius: 50%;
     color: var(--white);
     background: var(--bs-primary);
+    border: 1px solid red;
+
 }
 /* **************** Header - nav icon btn toggle **********************/
 .nav-icon .nav-icon-btn .btn-toggle{

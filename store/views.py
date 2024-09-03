@@ -63,9 +63,6 @@ class ArticleDetailView(DetailView):
     template_name = 'store/main_article.html'
     object = 'article'
 
-# cart page view content
-class CartView(TemplateView):
-    template_name = 'store/main_cart.html'
 # Register shopper view content
 class RegisterView(CreateView):
     model = Shopper

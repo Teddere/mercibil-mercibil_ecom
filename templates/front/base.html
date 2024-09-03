@@ -19,6 +19,7 @@
         {% include 'front/static/header.html' %}
         {% block content %}{% endblock content %}
         {% include 'front/static/footer.html' %}
+        {% include 'front/static/toast.html' %}
         <!-- Jquery library -->
         <script src="{% static 'js/libraries/jquery.min.js' %}"></script>
         <!-- Popper library -->
@@ -28,6 +29,11 @@
         <!-- Other plugin or other personal javascript file -->
         {% block scripts %}{% endblock scripts %}
         <!-- javascript -->
+        <!-- Toast component -->
+        <script src="{% static 'js/component/toast.js' %}"></script>
+        <script>
+        let csrf = '{{ csrf_token }}'
+    </script>
         <script src="{% static 'js/index.js' %}"></script>
     </body>
 </html>
