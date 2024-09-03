@@ -104,13 +104,22 @@ $(document).ready(function() {
 
     })
     // input
+    function debounce(func,wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(()=>{
+                func.apply(context,args)
+            },wait);
+        }
 
+    }
     $('.cart-qte-num').each(function() {
         $(this).on('input',debounce(function() {
             let qty = $(this).val();
             let stock = parseInt($(this).attr('max'));
             let item = $(this).next().data('filter');
-            console.log(qty)
             if ((qty >= 1 && qty <= stock) && qty !== '' ) {
 
                 let dataForm = new FormData();
@@ -141,16 +150,5 @@ $(document).ready(function() {
 
         },500))
     });
-    function debounce(func,wait) {
-        let timeout;
-        return function(...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(()=>{
-                func.apply(context,args)
-            },wait);
-        }
-
-    }
 
 });
