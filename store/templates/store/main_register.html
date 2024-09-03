@@ -24,40 +24,26 @@
                         <h2>Création d'un compte</h2>
                         <span>Créer un nouveau compte utilisateur</span>
                     </div>
-                    {% include 'front/static/../../../templates/back/static/flash_message.html' %}
+                    {% include 'front/static/flash_message.html' %}
                     <form  method="post">
                         {% csrf_token %}
                         <div class="row">
                             {% for field in form %}
                                 {% if field.name != 'usable_password' %}
-
-                                    <div class="col-12 mb-2">
-                                        <div class="row form-group position-relative">
-                                            <label for="{{ field.id_for_label }}" class="input-icon">
-                                                {% if field.id_for_label == 'id_username' %}
-                                                    <i class="fa-solid fa-user"></i>
-                                                {% elif field.id_for_label == 'id_email' %}
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                {% else %}
-                                                    <i class="fa-solid fa-lock"></i>
-                                                {% endif %}
-                                            </label>
-                                            {% if field.errors %}
-                                                {{ field | add_class:'form-control is-invalid' }}
-                                                <div class="invalid-feedback">
-                                                    {{ field.errors }}
-                                                </div>
-                                            {% else %}
-                                                {{ field }}
-                                            {% endif %}
-                                        </div>
+                                    <div class="col-12 mb-3">
+                                        {% if field.errors %}
+                                            {{ field | add_class:'form-control is-invalid' }}
+                                            <div class="invalid-feedback">
+                                                 {{ field.errors }}
+                                            </div>
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             {% endfor %}
-                            <div class="col-12">
-                                <div class="row form-group main-border-button">
-                                    <button type="submit">Créer</button>
-                                </div>
+                            <div class="col-12 mb-3 main-border-button">
+                                <button type="submit" class="w-100">Créer</button>
                             </div>
                         </div>
                     </form>

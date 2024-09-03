@@ -22,24 +22,18 @@ class LoginFormUser(forms.ModelForm):
         }
 
 
-
-class RegisterShopperUser(UserCreationForm):
-
+class RegisterShopperUser(forms.ModelForm):
+    password1 = forms.CharField(label='Mot de passe', widget=forms.PasswordInput(
+        attrs={'class':'form-control','placeholder': 'Confirmez votre mot de passe'}
+    ),required=True)
     class Meta:
         model = Shopper
-        fields = ['username','email','password1','password2']
+        fields = ['username', 'email', 'password']
         widgets = {
-            'username': forms.TextInput(attrs={'class':'form-control','placeholder':'Entrez un nom utilisateur','required':'true'}),
-            'email': forms.EmailInput(attrs={'class':'form-control','placeholder':'Entrez votre email','required':'true'}),
-        }
-        labels = {
-            'username': 'Nom utilisateur',
-            'email': 'Email',
+            'username': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Entrez un nom utilisateur', 'required': 'true'}),
+            'email': forms.EmailInput(
+                attrs={'class': 'form-control', 'placeholder': 'Entrez votre email', 'required': 'true'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(RegisterShopperUser, self).__init__(*args, **kwargs)
-        self.fields['password1'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'})
-        self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'})

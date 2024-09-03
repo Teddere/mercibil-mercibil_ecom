@@ -12,19 +12,12 @@
                         <h2>Connexion</h2>
                         <span>Connectez vous à votre compte en toute sécurité</span>
                     </div>
+                    {% include 'front/static/flash_message.html' %}
                     <form  method="post">
                         {% csrf_token %}
                         <div class="row">
                             {% for field in form %}
-                            <div class="col-12 mb-3">
-                                <div class="row form-group position-relative">
-                                    <label for="{{ field.id_for_label }}" class="input-icon">
-                                        {% if field.id_for_label == 'id_email' %}
-                                            <i class="fa-solid fa-envelope"></i>
-                                        {% else %}
-                                            <i class="fa-solid fa-lock"></i>
-                                        {% endif %}
-                                    </label>
+                                <div class="col-12 mb-3">
                                     {% if field.errors %}
                                         {{ field | add_class:'form-control is-invalid' }}
                                         <div class="invalid-feedback">
@@ -34,12 +27,9 @@
                                         {{ field }}
                                     {% endif %}
                                 </div>
-                            </div>
                             {% endfor %}
-                            <div class="col-12">
-                                <div class="row form-group main-border-button">
-                                    <button type="submit">Connexion</button>
-                                </div>
+                            <div class="col-12 main-border-button">
+                                <button type="submit" class="w-100">Connexion</button>
                             </div>
                         </div>
                     </form>

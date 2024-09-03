@@ -5,6 +5,9 @@ from django.contrib import messages
 from users.forms import RegisterShopperUser,LoginFormUser
 from users.models import Shopper
 from articles.models import Article, Category
+from shopping.utils import send_email
+from django.contrib.auth import authenticate, login, logout
+
 
 
 # Home page view content
@@ -71,12 +74,32 @@ class RegisterView(CreateView):
 
     def post(self, request, *args, **kwargs):
         context = { }
-        form = RegisterShopperUser(request.POST)
+        post_data = request.POST.copy()
+        if not post_data['password1'] or post_data['password1'] != post_data['password']:
+            form = RegisterShopperUser(post_data)
+            messages.warning(request, 'Le mot de passe est incorrect.')
+            context['form'] = form
+            return render(request, self.template_name, context)
+
+
+        post_data['username'] = post_data['username'].replace(' ', '_').title()
+        form = RegisterShopperUser(post_data)
 
         if form.is_valid():
-            user = form.save()
-            messages.success(request, f'Compte de {user.username} créé avec succès !')
-            return redirect('store:home')
+            shopper = form.save()
+            messages.success(request, f"Compte de {shopper.username} a été  créé avec succès !")
+
+            """ Sending Email
+            subject = "Bienvenue sur mercibil"
+            receivers = ["localhost"]
+            template_email = "customers/customer_email.html"
+            context_email = {
+                'username': post_data['username'].replace('_', ' ').title(),
+                'email': post_data['email'],
+            }
+            send_email(subject, receivers, template_email, context_email)
+             end email"""
+            return redirect('store:login')
         messages.error(request, 'Le compte n\'a pas pu être créer !')
         context["form"] = form
         return render(request, self.template_name, context)
@@ -84,6 +107,22 @@ class RegisterView(CreateView):
 class LoginView(FormView):
     form_class = LoginFormUser
     template_name = 'store/main_login.html'
+    def post(self, request, *args, **kwargs):
+        context = { }
+        form = LoginFormUser(request.POST)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('store:dashboard')
+        messages.warning(request,'Votre email ou mot de passe est incorrect !')
+        context["form"] = form
+
+        return render(request, self.template_name, context)
+
+
 
 class DashboardView(TemplateView):
     template_name = 'store/main_dashboard.html'
