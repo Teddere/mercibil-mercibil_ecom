@@ -26,7 +26,6 @@ def cart_add(request):
         article_qty = int(request.POST.get('article_qty',1))
         article_override = bool(request.POST.get('article_override',False))
         art = get_object_or_404(Article, id=article_id)
-
         cart.add(article=art, quantity=article_qty, override=article_override)
         cart_quantity = len(cart)
         context['quantity'] = cart_quantity

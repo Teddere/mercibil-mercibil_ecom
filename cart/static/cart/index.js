@@ -103,6 +103,54 @@ $(document).ready(function() {
             })
 
     })
+    // input
 
+    $('.cart-qte-num').each(function() {
+        $(this).on('input',debounce(function() {
+            let qty = $(this).val();
+            let stock = parseInt($(this).attr('max'));
+            let item = $(this).next().data('filter');
+            console.log(qty)
+            if ((qty >= 1 && qty <= stock) && qty !== '' ) {
+
+                let dataForm = new FormData();
+                dataForm.append('csrfmiddlewaretoken',csrf);
+                dataForm.append('article_id',item);
+                dataForm.append('article_qty',qty)
+                dataForm.append('article_override',true);
+                dataForm.append('action','post')
+                // Ajax
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add/',
+                    data: dataForm,
+                    contentType: false,
+                    processData: false,
+                    success: function (res){
+                        //document.getElementById('cart_num_total').textContent = res.quantity
+                        location.reload();
+                    },
+                    error: function (xhr,errmsg,err){
+                        console.log(err)
+                    }
+                })
+            }
+            else if(qty > stock) {
+                generateToast(`Stock de cette article est inférieur à ${qty} article(s)`,'warning','fa-triangle-exclamation')
+            }
+
+        },500))
+    });
+    function debounce(func,wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(()=>{
+                func.apply(context,args)
+            },wait);
+        }
+
+    }
 
 });
